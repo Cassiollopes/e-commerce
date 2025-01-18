@@ -17,9 +17,9 @@ export default function Search(props: {
   };
 }) {
   const searchParams = props.searchParams || {};
-  const query = searchParams.query;
-  const category = searchParams.category;
-  const price = searchParams.price;
+  const query = searchParams.query || "";
+  const category = searchParams.category || "";
+  const price = searchParams.price || "";
 
   return (
     <div
