@@ -1,5 +1,4 @@
-import CategoryFilter from "@/components/search/category-filter";
-import PriceFilter from "@/components/search/price-filter";
+
 import ProductsList from "@/components/search/products-list";
 import { ProductsListSkeleton } from "@/components/skeletons";
 import { Metadata } from "next";
