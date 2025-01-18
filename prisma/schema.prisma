@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  User              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+  User                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+model Category {
+  id                String              @id
+  name              String              @unique
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime
+  ProductCategories ProductCategories[]
+}
+
+model Product {
+  id                String              @id
+  name              String
+  price             Float
+  description       String
+  image             String
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime
+  ProductCategories ProductCategories[]
+  Variant           Variant[]
+}
+
+model ProductCategories {
+  productId    String
+  categoryName String
+  Category     Category @relation(fields: [categoryName], references: [name])
+  Product      Product  @relation(fields: [productId], references: [id])
+
+  @@id([productId, categoryName])
+}
+
+model Sale {
+  id              String        @id
+  payment_method  String
+  total           Float
+  createdAt       DateTime      @default(now())
+  userId          String
+  delivery_method String
+  User            User          @relation(fields: [userId], references: [email])
+  SaleProduct     SaleProduct[]
+}
+
+model SaleProduct {
+  id       String @id
+  quantity Int
+  saleId   String
+  sizeId   String
+  Sale     Sale   @relation(fields: [saleId], references: [id])
+  Size     Size   @relation(fields: [sizeId], references: [id])
+
+  @@unique([saleId, sizeId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Size {
+  id          String        @id
+  name        String
+  stock       Int
+  variantId   String?
+  order       Int?
+  SaleProduct SaleProduct[]
+  Variant     Variant?      @relation(fields: [variantId], references: [id])
+}
+
+model User {
+  id            String          @id
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  Account       Account[]
+  Authenticator Authenticator[]
+  Sale          Sale[]
+  Session       Session[]
+}
+
+model Variant {
+  id        String   @id
+  color     String
+  image     String
+  productId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Size      Size[]
+  Product   Product? @relation(fields: [productId], references: [id])
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
