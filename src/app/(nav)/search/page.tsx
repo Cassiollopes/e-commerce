@@ -9,17 +9,17 @@ export const metadata: Metadata = {
   title: "Search"
 };
 
-export default function Search(props: {
-  searchParams?: {
+export default async function Search(props: {
+  searchParams?: Promise<{
     query?: string;
     category?: string;
     price?: string;
-  };
+  }>;
 }) {
-  const searchParams = props.searchParams || {};
-  const query = searchParams.query || "";
-  const category = searchParams.category || "";
-  const price = searchParams.price || "";
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
+  const category = searchParams?.category || '';
+  const price = searchParams?.price || '';
 
   return (
     <div
