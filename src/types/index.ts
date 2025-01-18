@@ -52,7 +52,7 @@ export type CreateShoppingType = {
 }
 
 export type SaleType = {
-  user: {
+  user?: {
     name: string | null;
     image: string | null;
   };
