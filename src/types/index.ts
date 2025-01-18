@@ -51,15 +51,12 @@ export type CreateShoppingType = {
   products: { sizeId: string, quantity: number }[]
 }
 
-export type SaleType = {
-  user?: {
+export type LastSalesType = {
+  user: {
     name: string | null;
     image: string | null;
   };
   id: string;
-  payment_method: string;
-  delivery_method: string;
   total: number;
-  createdAt: Date;
   userId: string;
 }

@@ -1,6 +1,6 @@
 'use server'
 
-import { CategoryType, CreateShoppingType, ProductCardType, ProductDescType, ProductFiltered, SaleType } from "@/types";
+import { CategoryType, CreateShoppingType, LastSalesType, ProductCardType, ProductDescType, ProductFiltered } from "@/types";
 import { prisma } from "./db";
 
 export const getProductsCard = async (): Promise<ProductCardType[]> => {
@@ -204,7 +204,7 @@ export const getSalesDate = async () => {
   return sales;
 }
 
-export const getLastSales = async () => {
+export const getLastSales = async () : Promise<LastSalesType[]> => {
   const sales = await prisma.sale.findMany({
     orderBy: {
       createdAt: "desc",
@@ -225,7 +225,7 @@ export const getLastSales = async () => {
   return sales;
 }
 
-export const getSalesPaginated = async (page: number, query?: string): Promise<SaleType[]> => {
+export const getSalesPaginated = async (page: number, query?: string) => {
   const sales = await prisma.sale.findMany({
     where: {
       OR: [
