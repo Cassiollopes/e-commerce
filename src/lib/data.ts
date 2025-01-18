@@ -78,18 +78,19 @@ export const getProductsFiltered = async (query?: string, category?: string, pri
   const product = await prisma.product.findMany(
     {
       where: {
-        OR: [
-          { name: { contains: query || "", mode: "insensitive" } },
-          { categories: {some: {categoryName: { contains: query || "", mode: "insensitive" } }} },
-          { description: { contains: query || "", mode: "insensitive" } },
-        ],
-        categories: {
-          some: {
-            categoryName: {
-              equals: category === "tudo" ? undefined : category || undefined,
-            }
+        AND: [
+          {
+            OR: [
+              { name: { contains: query || "", mode: "insensitive" } },
+              { description: { contains: query || "", mode: "insensitive" } },
+            ]
+          },
+          {
+            categories: category && category !== "tudo"
+              ? { some: { categoryName: { contains: category, mode: "insensitive" } } }
+              : undefined, // Só aplica o filtro de categorias se um valor for passado
           }
-        }
+        ]
       },
       select: {
         id: true,
