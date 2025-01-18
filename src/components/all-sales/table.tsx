@@ -11,7 +11,6 @@ import { Card } from "../ui/card";
 import SalesAvatar from "../sales-avatar";
 import PriceFormatter from "@/lib/price-formatter";
 import { AlertCircle } from "lucide-react";
-import { Sale } from "@prisma/client";
 
 export default async function SalesTable({ page, query }: { page?: string, query?: string }) {
   const sales = await getSalesPaginated(Number(page) || 1, query);
