@@ -15,7 +15,7 @@ export default async function LastSales() {
       <ul className="flex flex-col w-full">
         {sales.map(sale => (
           <li key={sale.id} className="flex items-start justify-between gap-2 w-full border-b py-3">
-            <SalesAvatar sale={{ user: sale.user, userId: sale.userId }} />
+            <SalesAvatar sale={{ user: sale.User, userId: sale.userId }} />
             <span className="font-bold whitespace-nowrap">+ {PriceFormatter(sale.total)}</span>
           </li>
         ))}

@@ -80,10 +80,10 @@ export const getProductsFiltered = async (query?: string, category?: string, pri
       where: {
         OR: [
           { name: { contains: query || "", mode: "insensitive" } },
-          { categories: {some: {categoryName: { contains: query || "", mode: "insensitive" } }} },
+          { ProductCategories: {some: {categoryName: { contains: query || "", mode: "insensitive" } }} },
           { description: { contains: query || "", mode: "insensitive" } },
         ],
-        categories: {
+        ProductCategories: {
           some: {
             categoryName: {
               equals: category === "tudo" ? undefined : category || undefined,
@@ -135,8 +135,13 @@ export const createShopping = async (data: CreateShoppingType) => {
             payment_method: data.payment_method,
             userId: data.userId,
             total: data.total,
-            products: {
-              create: data.products
+            SaleProduct: {
+              createMany: {
+                data: data.products.map((product) => ({
+                  sizeId: product.sizeId,
+                  quantity: product.quantity,
+                }))
+              }
             }
           }
         })
@@ -171,7 +176,7 @@ export const getSales = async () => {
         userId: true,
         total: true,
         createdAt: true,
-        user: {
+        User: {
           select: {
             name: true,
             image: true,
@@ -214,7 +219,7 @@ export const getLastSales = async () => {
       id: true,
       userId: true,
       total: true,
-      user: {
+      User: {
         select: {
           name: true,
           image: true,
@@ -229,7 +234,7 @@ export const getSalesPaginated = async (page: number, query?: string) => {
   const sales = await prisma.sale.findMany({
     where: {
       OR: [
-        { user: { name: { contains: query || "", mode: "insensitive" } } },
+        { User: { name: { contains: query || "", mode: "insensitive" } } },
         { userId: { contains: query || "", mode: "insensitive" } }
       ]
     },
@@ -242,7 +247,7 @@ export const getSalesPaginated = async (page: number, query?: string) => {
       payment_method: true,
       delivery_method: true,
       createdAt: true,
-      user: {
+      User: {
         select: {
           name: true,
           image: true,
@@ -257,7 +262,7 @@ export const getNumberOfPages = async (query?: string) => {
   const salesCount = await prisma.sale.count({
     where: {
       OR: [
-        { user: { name: { contains: query || "", mode: "insensitive" } } },
+        { User: { name: { contains: query || "", mode: "insensitive" } } },
         { userId: { contains: query || "", mode: "insensitive" } }
       ]
     }

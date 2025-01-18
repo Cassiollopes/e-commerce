@@ -41,7 +41,7 @@ model Authenticator {
 }
 
 model Category {
-  id                String              @id
+  id       String @id @default(uuid())
   name              String              @unique
   createdAt         DateTime            @default(now())
   updatedAt         DateTime
@@ -49,7 +49,7 @@ model Category {
 }
 
 model Product {
-  id                String              @id
+  id       String @id @default(uuid())
   name              String
   price             Float
   description       String
@@ -70,7 +70,7 @@ model ProductCategories {
 }
 
 model Sale {
-  id              String        @id
+  id       String @id @default(uuid())
   payment_method  String
   total           Float
   createdAt       DateTime      @default(now())
@@ -81,7 +81,7 @@ model Sale {
 }
 
 model SaleProduct {
-  id       String @id
+  id       String @id @default(uuid())
   quantity Int
   saleId   String
   sizeId   String
@@ -101,7 +101,7 @@ model Session {
 }
 
 model Size {
-  id          String        @id
+  id       String @id @default(uuid())
   name        String
   stock       Int
   variantId   String?
@@ -111,7 +111,7 @@ model Size {
 }
 
 model User {
-  id            String          @id
+  id       String @id @default(uuid())
   name          String?
   email         String          @unique
   emailVerified DateTime?
@@ -125,7 +125,7 @@ model User {
 }
 
 model Variant {
-  id        String   @id
+  id       String @id @default(uuid())
   color     String
   image     String
   productId String?
