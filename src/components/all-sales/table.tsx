@@ -11,10 +11,9 @@ import { Card } from "../ui/card";
 import SalesAvatar from "../sales-avatar";
 import PriceFormatter from "@/lib/price-formatter";
 import { AlertCircle } from "lucide-react";
-import { SaleType } from "@/types";
 
 export default async function SalesTable({ page, query }: { page?: string, query?: string }) {
-  const sales: SaleType[] = await getSalesPaginated(Number(page) || 1, query);
+  const sales = await getSalesPaginated(Number(page) || 1, query);
 
   return (
     <Card className="overflow-hidden bg-muted/50 border-none p-4 rounded-xl">
