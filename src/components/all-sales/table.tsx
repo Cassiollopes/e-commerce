@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table"
 import { getSalesPaginated } from "@/lib/data";
 import { Card } from "../ui/card";
+import SalesAvatar from "../sales-avatar";
 import PriceFormatter from "@/lib/price-formatter";
 import { AlertCircle } from "lucide-react";
 
@@ -30,6 +31,7 @@ export default async function SalesTable({ page, query }: { page?: string, query
           {sales.map((sale) => (
             <TableRow key={sale.id}>
               <TableCell className="w-2/4 min-w-[250px]">
+                <SalesAvatar sale={{ user: sale.user, userId: sale.userId }} />
               </TableCell>
               <TableCell>{sale.payment_method}</TableCell>
               <TableCell>{sale.createdAt.toLocaleDateString()}</TableCell>
