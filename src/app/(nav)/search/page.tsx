@@ -29,7 +29,7 @@ export default async function Search(props: {
       <Suspense fallback={<div className="col-span-1 md:col-span-2 lg:col-span-1">sdfasadf</div>}>
         <CategoryFilter className="col-span-1 md:col-span-2 lg:col-span-1" />
       </Suspense>
-      <Suspense fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
+      <Suspense key={query} fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
         <ProductsList query={query} category={category} price={price} className="max-md:order-3 md:col-span-6" />
       </Suspense>
       <Suspense fallback={<div className="col-span-1 md:col-span-2 lg:col-span-1">sdfasadf</div>}>
