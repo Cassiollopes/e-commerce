@@ -50,19 +50,3 @@ export type CreateShoppingType = {
   total: number,
   products: { sizeId: string, quantity: number }[]
 }
-
-export type LastSalesType = {
-  user: {
-    name: string | null;
-    image: string | null;
-  };
-  id: string;
-  total: number;
-  userId: string;
-}
-
-export type SaleType = LastSalesType & {
-  payment_method: string;
-  delivery_method: string;
-  createdAt: Date;
-}

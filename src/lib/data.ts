@@ -1,6 +1,6 @@
 'use server'
 
-import { CategoryType, CreateShoppingType, LastSalesType, ProductCardType, ProductDescType, ProductFiltered, SaleType } from "@/types";
+import { CategoryType, CreateShoppingType, ProductCardType, ProductDescType, ProductFiltered } from "@/types";
 import { prisma } from "./db";
 
 export const getProductsCard = async (): Promise<ProductCardType[]> => {
@@ -78,19 +78,18 @@ export const getProductsFiltered = async (query?: string, category?: string, pri
   const product = await prisma.product.findMany(
     {
       where: {
-        AND: [
-          {
-            OR: [
-              { name: { contains: query || "", mode: "insensitive" } },
-              { description: { contains: query || "", mode: "insensitive" } },
-            ]
-          },
-          {
-            categories: category && category !== "tudo"
-              ? { some: { categoryName: { contains: category, mode: "insensitive" } } }
-              : undefined, // Só aplica o filtro de categorias se um valor for passado
+        OR: [
+          { name: { contains: query || "", mode: "insensitive" } },
+          { categories: {some: {categoryName: { contains: query || "", mode: "insensitive" } }} },
+          { description: { contains: query || "", mode: "insensitive" } },
+        ],
+        categories: {
+          some: {
+            categoryName: {
+              equals: category === "tudo" ? undefined : category || undefined,
+            }
           }
-        ]
+        }
       },
       select: {
         id: true,
@@ -205,7 +204,7 @@ export const getSalesDate = async () => {
   return sales;
 }
 
-export const getLastSales = async () : Promise<LastSalesType[]> => {
+export const getLastSales = async () => {
   const sales = await prisma.sale.findMany({
     orderBy: {
       createdAt: "desc",
@@ -226,7 +225,7 @@ export const getLastSales = async () : Promise<LastSalesType[]> => {
   return sales;
 }
 
-export const getSalesPaginated = async (page: number, query?: string) : Promise<SaleType[]> => {
+export const getSalesPaginated = async (page: number, query?: string) => {
   const sales = await prisma.sale.findMany({
     where: {
       OR: [
