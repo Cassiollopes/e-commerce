@@ -22,17 +22,14 @@ export default async function Search(props: {
   const price = searchParams?.price || '';
 
   return (
-    <Suspense>
-      <div
-        className="grid grid-cols-10 lg:grid-cols-8 items-start justify-items-start md:min-h-screen 
+    <div
+      className="grid grid-cols-10 lg:grid-cols-8 items-start justify-items-start md:min-h-screen 
       px-4 max-md:gap-2 gap-8 max-md:grid-cols-1"
-      >
-        <CategoryFilter className="col-span-1 md:col-span-2 lg:col-span-1" />
-        <Suspense fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
-          <ProductsList query={query} category={category} price={price} className="max-md:order-3 md:col-span-6" />
-        </Suspense>
-        <PriceFilter className="col-span-1 md:col-span-2 lg:col-span-1 max-md:pb-2" />
-      </div>
-    </Suspense>
+    >
+      <Suspense fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
+        <ProductsList query={query} category={category} price={price} className="max-md:order-3 md:col-span-6" />
+      </Suspense>
+      <PriceFilter className="col-span-1 md:col-span-2 lg:col-span-1 max-md:pb-2" />
+    </div>
   )
 }
