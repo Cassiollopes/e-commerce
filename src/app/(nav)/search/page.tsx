@@ -9,32 +9,28 @@ export const metadata: Metadata = {
   title: "Search"
 };
 
-export default async function Search(props: {
-  searchParams?: Promise<{
+export default function Search(props: {
+  searchParams?: {
     query?: string;
     category?: string;
     price?: string;
-  }>;
+  };
 }) {
-  const searchParams = await props.searchParams;
-  const query = searchParams?.query || '';
-  const category = searchParams?.category || '';
-  const price = searchParams?.price || '';
+  const searchParams = props.searchParams || {};
+  const query = searchParams.query || "";
+  const category = searchParams.category || "";
+  const price = searchParams.price || "";
 
   return (
     <div
       className="grid grid-cols-10 lg:grid-cols-8 items-start justify-items-start md:min-h-screen 
       px-4 max-md:gap-2 gap-8 max-md:grid-cols-1"
     >
-      <Suspense>
-        <CategoryFilter className="col-span-1 md:col-span-2 lg:col-span-1" />
-      </Suspense>
+      <CategoryFilter className="col-span-1 md:col-span-2 lg:col-span-1" />
       <Suspense fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
         <ProductsList query={query} category={category} price={price} className="max-md:order-3 md:col-span-6" />
       </Suspense>
-      <Suspense>
-        <PriceFilter className="col-span-1 md:col-span-2 lg:col-span-1 max-md:pb-2" />
-      </Suspense>
+      <PriceFilter className="col-span-1 md:col-span-2 lg:col-span-1 max-md:pb-2" />
     </div>
   )
 }
