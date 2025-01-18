@@ -21,7 +21,7 @@ export type ProductDescType = {
       order: number | null
     }[]
   }[]
-} 
+}
 
 export type CartItemType = {
   productId: string,
@@ -35,7 +35,7 @@ export type CartItemType = {
   price: number
 }
 
-export type ProductFiltered = ProductCardType & { 
+export type ProductFiltered = ProductCardType & {
   description: string
 }
 
@@ -59,4 +59,10 @@ export type LastSalesType = {
   id: string;
   total: number;
   userId: string;
+}
+
+export type SaleType = LastSalesType & {
+  payment_method: string;
+  delivery_method: string;
+  createdAt: Date;
 }
