@@ -38,6 +38,12 @@ export default function ScrollNav() {
   }, []);
 
   useEffect(() => {
+    window.addEventListener('storage', () => setTimeout(() => {
+      setVisible(true);
+    }, 500));
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setOpen(false);
     };
@@ -49,55 +55,50 @@ export default function ScrollNav() {
   useEffect(() => { setSearchOpen(false) }, [pathname]);
 
   return (
-    <>
-      <AnimatePresence>
-        {visible && (
-          <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            whileInView={{ boxShadow: "0 0px 50px rgba(0, 0, 0, 0.1)" }}
-            exit={{ y: open ? -200 : -100 }}
-            transition={{ duration: .8, ease: "easeInOut" }}
-            className="md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
-            bg-background items-center justify-between p-3 pl-2 flex-wrap min-h-[68px]"
-          >
-            {!searchOpen && (
-              <Link href="/" className="bg-background h-10 w-10 flex items-center justify-center border-r">
-                <Box className="h-5 w-5" />
-              </Link>
-            )}
-            <div
-              className="flex-1 px-2 focus-within:px-0"
-              onFocus={() => setSearchOpen(true)}
-              onBlur={() => { setTimeout(() => setSearchOpen(false), 500) }}
+    <nav
+      className={`${visible ? "translate-y-0" : "-translate-y-full delay-500 scale-95"} transition-all
+      ease-in-out duration-500 md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
+      bg-background items-center justify-between p-3 flex-wrap shadow-sm border-b`}
+    >
+      <Link href="/" className={`h-10 ${searchOpen ? "w-0 opacity-0" : "w-10 border-r mr-2"} transition-all 
+        ease-in-out duration-500 flex items-center justify-center`}>
+        <Box className="h-5 w-5" />
+      </Link>
+      <div
+        className="flex-1"
+        onFocus={() => { setSearchOpen(true), setOpen(false) }}
+        onBlur={() => { setTimeout(() => setSearchOpen(false), 300) }}
+      >
+        <SearchInput />
+      </div>
+      <div
+        className={`${searchOpen ? "w-0 opacity-0" : "ml-2 w-11"} transition-all ease-in-out duration-700`}>
+        {
+          pathname === "/search" ? (
+            <Button variant="outline"
+              onClick={() => open ? setOpen(false) : setOpen(true)}
+              className="h-11 w-11"
             >
-              <SearchInput />
-            </div>
-            {!searchOpen && (
-              pathname === "/search" ? (
-                <Button variant="outline"
-                  onClick={() => open ? setOpen(false) : setOpen(true)}
-                >
-                  <Filter />
-                </Button>
-              ) : <Cart />
-            )}
-            <AnimatePresence>
-              {open && pathname === "/search" && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                  animate={{ opacity: 1, height: "auto", marginTop: 10 }}
-                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                  transition={{ duration: .5, ease: "easeInOut" }}
-                  className="w-full order-4 gap-1 flex flex-col overflow-hidden">
-                  <CategoryFilter />
-                  <PriceFilter />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.nav>
+              <Filter />
+            </Button>
+          ) : (
+            <Cart />
+          )
+        }
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1, marginTop: ".5rem" }}
+            exit={{ height: 0, opacity: 0, marginTop: "0" }}
+            transition={{ duration: .5, ease: "easeInOut" }}
+            className="w-full order-4 gap-1 flex flex-col overflow-hidden">
+            <CategoryFilter />
+            <PriceFilter />
+          </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   )
 }

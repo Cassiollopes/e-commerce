@@ -11,11 +11,10 @@ import { Toaster } from "../ui/sonner";
 
 export default function ProductIdDesc({ product }: { product: ProductDescType }) {
   const [selectedVariant, setSelectedVariant] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<number | undefined>();
+  const [selectedSize, setSelectedSize] = useState<number | undefined>(0);
   const [quantity, setQuantity] = useState(1);
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ error?: string; frontAlert?: string } | undefined>(undefined);
 
   const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
 
@@ -31,14 +30,22 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
     }
   }, [selectedSize, selectedVariant])
 
-  useEffect(() => setMessage({}), [selectedSize])
+  useEffect(() => {
+    if (selectedSize === undefined || stock <= 0) {
+      const sizeIndex = product.Variant[selectedVariant].Size.findIndex(size => size.stock > 0);
+      if (sizeIndex !== -1) {
+        setSelectedSize(sizeIndex);
+      } else {
+        setSelectedSize(undefined);
+      }
+    }
+  }, [selectedVariant, product]);
 
   const handleAddToCart = async () => {
-    setMessage({})
     setLoading(true);
 
     if (selectedSize === undefined) {
-      setMessage({ frontAlert: "Selecione um tamanho." });
+      toast.warning("Estoque insuficiente.");
       return setLoading(false);
     }
 
@@ -56,14 +63,8 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
 
     const response = await handleSetItem(cartItem)
 
-    if (response?.alert) {
-      toast.error(response.alert);
-      return setLoading(false);
-    };
-
     if (response?.error) {
-      setMessage({})
-      setMessage({ error: response.error });
+      toast.error(response.error);
       return setLoading(false);
     }
 
@@ -77,7 +78,6 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         <h2 className="max-lg:text-3xl text-5xl font-bold">{product.name}</h2>
         <span className="max-lg:text-2xl text-3xl font-bold text-muted-foreground">R$ {product.price}</span>
       </div>
-      {message?.frontAlert && <span className="text-red-500">{message.frontAlert}</span>}
       <div className="flex flex-col gap-2">
         <h3 className="text-2xl font-bold">Cor</h3>
         <ul className="flex gap-2 overflow-x-auto">
@@ -114,9 +114,9 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         <Select onValueChange={(e) => setQuantity(parseInt(e))}>
           <SelectTrigger className="w-full">
             {`${selectedSize !== undefined
-                ? `Quantidade: ${quantity} | (${stock})Disponíveis`
-                : "Selecione um tamanho"
-                }`}
+              ? `Quantidade: ${quantity} | (${stock})Disponíveis`
+              : "Nenhum tamanho disponível"
+              }`}
           </SelectTrigger>
           {selectedSize !== undefined &&
             <SelectContent>
@@ -144,7 +144,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         <Plus className="absolute max-sm:left-3 left-5 md:left-3 lg:left-5" />
         {loading ? "Adicionando..." : "Adicionar ao carrinho"}
       </Button>
-      <Toaster className="z-40"/>
+      <Toaster className="z-40" />
     </div>
   );
 }

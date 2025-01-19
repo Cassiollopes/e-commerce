@@ -23,9 +23,9 @@ export const handleSetItem = async (product: CartItemType) => {
     const existingProduct = fetchExistingProducts(product, storedProducts);
 
     if (existingProduct) {
-      if (existingProduct.quantity === stock) return { alert: "Quantidade máxima atingida" };
+      if (existingProduct.quantity === stock) return { error: "Quantidade máxima atingida" };
 
-      if ((existingProduct.quantity + product.quantity) > stock) return { alert: "Quantidade máxima atingida" }
+      if ((existingProduct.quantity + product.quantity) > stock) return { error: "Quantidade máxima atingida" }
       existingProduct.quantity += product.quantity;
     } else {
       storedProducts.push(product);

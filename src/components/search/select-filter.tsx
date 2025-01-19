@@ -33,7 +33,7 @@ export default function SelectFilter({ items, placeholder, label, param }: {
     setSelected(term);
     const params = new URLSearchParams(searchParams);
     params.set(param, term);
-    params.delete('query');
+    if(param === 'category') params.delete('query');
 
     replace(`${pathname}?${params.toString()}`);
   }

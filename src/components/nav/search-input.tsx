@@ -53,7 +53,11 @@ export default function SearchInput() {
 
   useEffect(() => {
     if (pathname === '/search') return setValue(searchParams.get('query')?.toString() || '');
-  }, [pathname, searchParams]);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (pathname !== '/search') setValue('');
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,7 +87,7 @@ export default function SearchInput() {
           }
         }}
         onFocus={() => setShowList(true)}
-        onBlur={() => { setShowList(false); setProducts([]); if (pathname !== '/search') setValue(''); }}
+        onBlur={() => { setShowList(false); setProducts([]) }}
         autoCapitalize="off"
         enterKeyHint="enter"
       />

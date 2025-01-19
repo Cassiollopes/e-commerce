@@ -7,7 +7,7 @@ export default async function LastSales() {
   const sales = await getLastSales();
 
   return (
-    <div className="aspect-video rounded-xl bg-muted/50 grid justify-items-center p-8 gap-4 max-md:w-full lg:w-1/2">
+    <div className="aspect-video rounded-xl bg-muted/50 flex flex-col p-8 gap-4 max-md:w-full lg:w-1/2">
       <div className="flex items-center w-full justify-between gap-1 justify-self-start h-fit">
         <h2 className="text-2xl font-semibold">Ultimas Vendas</h2>
         <ShoppingBag className="h-5 w-5" />
