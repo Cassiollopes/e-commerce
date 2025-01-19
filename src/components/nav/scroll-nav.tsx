@@ -67,7 +67,7 @@ export default function ScrollNav() {
               </Link>
             )}
             <div
-              className="flex-1 px-2"
+              className="flex-1 px-2 focus-within:px-0"
               onFocus={() => setSearchOpen(true)}
               onBlur={() => { setTimeout(() => setSearchOpen(false), 500) }}
             >
