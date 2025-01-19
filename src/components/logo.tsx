@@ -13,3 +13,17 @@ export const LogoRounded = () => {
     </Link>
   )
 }
+
+export const Logo = ({ className }: { className?: string }) => {
+  return (
+    <Box className={`${className ? className : 'h-5 w-5'}`} />
+  )
+}
+
+export const LogoText = ({ className }: { className?: string }) => {
+  return (
+    <span className={`${className ? className : 'text-base font-semibold'}`}>
+      SLA STORE
+    </span>
+  )
+}

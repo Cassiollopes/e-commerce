@@ -1,8 +1,6 @@
 'use client'
 
-import { Box } from "lucide-react";
 import UserMenu from "../menu/user-menu";
-import Link from "next/link";
 import Links from "./links";
 import Cart from "../cart";
 import MenuMobile from "../menu/menu-mobile";
@@ -24,7 +22,7 @@ export default function NavBar() {
       window.removeEventListener("scroll", handleScroll);
     };
   })
-  
+
   return (
     <nav
       data-scroll={scroll}

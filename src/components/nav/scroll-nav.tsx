@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Filter } from "lucide-react";
+import { Filter } from "lucide-react";
 import Link from "next/link";
 import Cart from "../cart";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import CategoryFilter from "../search/category-filter";
 import PriceFilter from "../search/price-filter";
+import { Logo } from "../logo";
 
 export default function ScrollNav() {
   const pathname = usePathname();
@@ -62,11 +63,11 @@ export default function ScrollNav() {
     >
       <Link href="/" className={`h-10 ${searchOpen ? "w-0 opacity-0" : "w-10 border-r mr-2"} transition-all 
         ease-in-out duration-500 flex items-center justify-center`}>
-        <Box className="h-5 w-5" />
+        <Logo />
       </Link>
       <div
         className="flex-1"
-        onFocus={() => { setSearchOpen(true), setOpen(false) }}
+        onFocus={() => { setSearchOpen(true); setOpen(false) }}
         onBlur={() => { setTimeout(() => setSearchOpen(false), 300) }}
       >
         <SearchInput />

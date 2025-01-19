@@ -1,6 +1,6 @@
 'use client'
 
-import { BadgeAlert, Box } from "lucide-react";
+import { BadgeAlert } from "lucide-react";
 import { Button } from "../ui/button";
 import Resume from "./resume";
 import MobileResume from "./mobile-resume";
@@ -8,6 +8,7 @@ import PaymentForm from "./payment-form";
 import { useEffect, useState } from "react";
 import { CartItemType } from "@/types";
 import PriceFormatter from "@/lib/price-formatter";
+import { Logo } from "../logo";
 
 export default function Checkout() {
   const [products, setProducts] = useState<CartItemType[]>([])
@@ -42,7 +43,7 @@ export default function Checkout() {
           Simulação
         </Button>
         <div className="flex items-start gap-1">
-          <Box className="h-14 w-14" />
+          <Logo className="h-14 w-14" />
           <div>
             <h1 className="text-2xl font-bold">Checkout</h1>
             <h3 className="text-xs text-muted-foreground">{products.length} produto(s)</h3>
