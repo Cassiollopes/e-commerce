@@ -11,7 +11,7 @@ import { Toaster } from "../ui/sonner";
 
 export default function ProductIdDesc({ product }: { product: ProductDescType }) {
   const [selectedVariant, setSelectedVariant] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<number | undefined>(0);
+  const [selectedSize, setSelectedSize] = useState<number | undefined>();
   const [quantity, setQuantity] = useState(1);
 
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,9 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
   }, [selectedVariant])
 
   useEffect(() => {
-    if (selectedSize !== undefined && stock < quantity && stock > 0) {
+    if (selectedSize === undefined) {
+      setQuantity(1);
+    } else if (stock < quantity && stock > 0) {
       setQuantity(product.Variant[selectedVariant].Size[selectedSize].stock);
     }
   }, [selectedSize, selectedVariant])
