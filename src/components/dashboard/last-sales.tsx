@@ -5,7 +5,6 @@ import PriceFormatter from "@/lib/price-formatter";
 
 export default async function LastSales() {
   const sales = await getLastSales();
-  console.log(sales);
 
   return (
     <div className="aspect-video rounded-xl bg-muted/50 flex flex-col p-8 gap-4 max-md:w-full lg:w-1/2">
