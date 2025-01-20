@@ -3,7 +3,7 @@
 import { Filter } from "lucide-react";
 import Link from "next/link";
 import Cart from "../cart";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchInput from "../nav/search-input";
 import { usePathname } from "next/navigation";
@@ -18,14 +18,18 @@ export default function ScrollNav() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  const lastScrollY = useRef(0);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > 100) {
+      if (currentScrollY < lastScrollY.current && currentScrollY > 150) {
         setVisible(true);
       } else {
         setVisible(false);
       }
+
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
