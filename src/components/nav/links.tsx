@@ -10,8 +10,8 @@ const links = [
     href: "/search?category=camisetas",
   },
   {
-    title: "Accessorios",
-    href: "/search?category=accessorios",
+    title: "Acessorios",
+    href: "/search?category=acessorios",
   },
 ];
 

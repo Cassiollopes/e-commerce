@@ -3,7 +3,7 @@
 import { Filter } from "lucide-react";
 import Link from "next/link";
 import Cart from "../cart";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchInput from "../nav/search-input";
 import { usePathname } from "next/navigation";
@@ -18,17 +18,14 @@ export default function ScrollNav() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const lastScrollY = useRef(0);
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY < lastScrollY.current && currentScrollY > 100) {
+      if (currentScrollY > 100) {
         setVisible(true);
       } else {
         setVisible(false);
       }
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -36,12 +33,6 @@ export default function ScrollNav() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('storage', () => setTimeout(() => {
-      setVisible(true);
-    }, 500));
   }, []);
 
   useEffect(() => {
@@ -57,9 +48,9 @@ export default function ScrollNav() {
 
   return (
     <nav
-      className={`${visible ? "translate-y-0" : "-translate-y-full delay-500 scale-95"} transition-all
-      ease-in-out duration-500 md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
-      bg-background items-center justify-between p-3 flex-wrap shadow-sm border-b`}
+      className={`${visible ? "translate-y-0" : "-translate-y-full delay-500"} transition-all
+      ease-in-out duration-700 md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
+      bg-background items-center justify-between p-3 flex-wrap drop-shadow-sm border-b`}
     >
       <Link href="/" className={`h-10 ${searchOpen ? "w-0 opacity-0" : "w-10 border-r mr-2"} transition-all 
         ease-in-out duration-500 flex items-center justify-center`}>
@@ -73,7 +64,7 @@ export default function ScrollNav() {
         <SearchInput />
       </div>
       <div
-        className={`${searchOpen ? "w-0 opacity-0" : "ml-2 w-11"} transition-all ease-in-out duration-700`}>
+        className={`${searchOpen ? "w-0 opacity-0" : "ml-2 w-11"} transition-all ease-in-out duration-500`}>
         {
           pathname === "/search" ? (
             <Button variant="outline"

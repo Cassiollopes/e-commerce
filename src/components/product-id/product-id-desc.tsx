@@ -41,7 +41,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         setSelectedSize(undefined);
       }
     }
-  }, [selectedVariant, product]);
+  }, [selectedVariant, product, selectedSize]);
 
   const handleAddToCart = async () => {
     setLoading(true);
