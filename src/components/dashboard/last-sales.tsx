@@ -23,5 +23,3 @@ export default async function LastSales() {
     </div>
   );
 }
-
-export const dynamic = 'force-dynamic'
