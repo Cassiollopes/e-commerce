@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { handleSetItem } from "@/lib/local-storage";
 import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
 import { CartItemType, ProductDescType } from "@/types";
@@ -18,7 +18,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
 
   const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
 
-  useEffect(() => {
+  const updateSelectedSize = useCallback(() => {
     if (selectedSize === undefined || stock <= 0) {
       const sizeIndex = product.Variant[selectedVariant].Size.findIndex(size => size.stock > 0);
       if (sizeIndex !== -1) {
@@ -28,6 +28,10 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
       }
     }
   }, [selectedVariant, product.Variant[selectedVariant].Size, selectedSize, stock]);
+
+  useEffect(() => {
+    updateSelectedSize();
+  }, [selectedVariant]);
 
   const handleAddToCart = async () => {
     setLoading(true);
