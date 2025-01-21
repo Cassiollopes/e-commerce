@@ -21,7 +21,11 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
   useEffect(() => {
     if (selectedSize === undefined || stock <= 0) {
       const sizeIndex = product.Variant[selectedVariant].Size.findIndex(size => size.stock > 0);
-      setSelectedSize(sizeIndex);
+      if (sizeIndex !== -1) {
+        setSelectedSize(sizeIndex);
+      } else {
+        setSelectedSize(undefined);
+      }
     }
   }, [selectedVariant, product]);
 
