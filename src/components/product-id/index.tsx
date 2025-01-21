@@ -17,5 +17,3 @@ export default async function ProductId({ id }: { id: string }) {
     </Card>
   );
 }
-
-export const dynamic = 'force-dynamic'

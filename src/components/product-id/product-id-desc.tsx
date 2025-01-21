@@ -136,3 +136,5 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic'
