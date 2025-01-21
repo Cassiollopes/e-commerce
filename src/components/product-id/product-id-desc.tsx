@@ -29,7 +29,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         setSelectedSize(undefined);
       }
     }
-  }, [selectedVariant, product, selectedSize]); // Remove stock da dependência
+  }, [selectedVariant, product, selectedSize]);
 
   const handleAddToCart = async () => {
     setLoading(true);
