@@ -25,3 +25,5 @@ export default async function Product(props: { params: Promise<{ id: string }> }
     </div>
   )
 }
+
+export const dynamic = 'force-dynamic'
