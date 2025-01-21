@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { handleSetItem } from "@/lib/local-storage";
 import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
 import { CartItemType, ProductDescType } from "@/types";
