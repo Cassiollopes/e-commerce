@@ -18,8 +18,13 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
 
   const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
 
+
   useEffect(() => {
-    if (product && product.Variant && product.Variant[selectedVariant]) {
+    if (!product || !product.Variant || !product.Variant[selectedVariant]) {
+      return; // Evita erros se o produto não estiver pronto
+    }
+
+    if (selectedSize === undefined || stock <= 0) {
       const sizes = product.Variant[selectedVariant].Size || [];
       const sizeIndex = sizes.findIndex(size => size.stock > 0);
 
@@ -29,7 +34,8 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         setSelectedSize(undefined);
       }
     }
-  }, [product]);
+  }, [selectedVariant, product, selectedSize, stock]);
+
 
   const handleAddToCart = async () => {
     setLoading(true);
