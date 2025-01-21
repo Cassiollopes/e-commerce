@@ -53,7 +53,7 @@ export default function ScrollNav() {
   return (
     <nav
       className={`${visible ? "translate-y-0" : "-translate-y-full delay-500"} transition-all
-      ease-in-out duration-700 delay-300 md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
+      ease-in-out duration-700 delay-200 md:hidden max-md:fixed top-0 left-0 right-0 z-50 max-md:flex 
       bg-background items-center justify-between p-3 flex-wrap drop-shadow-sm border-b`}
     >
       <Link href="/" className={`h-10 ${searchOpen ? "w-0 opacity-0" : "w-10 border-r mr-2"} transition-all 
