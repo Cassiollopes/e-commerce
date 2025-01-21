@@ -19,10 +19,8 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
   const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
 
   useEffect(() => {
-    // Verifica se é uma mudança de variante (não uma mudança de tamanho)
     const currentVariantSizes = product.Variant[selectedVariant].Size;
 
-    // Se não há tamanho selecionado ou o estoque do tamanho atual é 0
     if (selectedSize === undefined || currentVariantSizes[selectedSize]?.stock <= 0) {
       const sizeIndex = currentVariantSizes.findIndex(size => size.stock > 0);
       if (sizeIndex !== -1) {
@@ -31,7 +29,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         setSelectedSize(undefined);
       }
     }
-  }, [selectedVariant, product]); // Remove stock da dependência
+  }, [selectedVariant, product, selectedSize]); // Remove stock da dependência
 
   const handleAddToCart = async () => {
     setLoading(true);
