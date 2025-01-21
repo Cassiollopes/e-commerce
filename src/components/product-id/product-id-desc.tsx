@@ -19,29 +19,11 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
   const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
 
   useEffect(() => {
-    if (selectedSize !== undefined && stock === 0) {
-      setSelectedSize(undefined);
-    }
-  }, [selectedVariant])
-
-  useEffect(() => {
-    if (selectedSize === undefined) {
-      setQuantity(1);
-    } else if (stock < quantity && stock > 0) {
-      setQuantity(product.Variant[selectedVariant].Size[selectedSize].stock);
-    }
-  }, [selectedSize, selectedVariant])
-
-  useEffect(() => {
     if (selectedSize === undefined || stock <= 0) {
       const sizeIndex = product.Variant[selectedVariant].Size.findIndex(size => size.stock > 0);
-      if (sizeIndex !== -1) {
-        setSelectedSize(sizeIndex);
-      } else {
-        setSelectedSize(undefined);
-      }
+      setSelectedSize(sizeIndex);
     }
-  }, [selectedVariant, product, selectedSize]);
+  }, [selectedVariant, product]);
 
   const handleAddToCart = async () => {
     setLoading(true);
