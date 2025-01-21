@@ -27,7 +27,7 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
         setSelectedSize(undefined);
       }
     }
-  }, [selectedVariant, product, selectedSize, stock]);
+  }, [selectedVariant, product.Variant[selectedVariant].Size, selectedSize, stock]);
 
   const handleAddToCart = async () => {
     setLoading(true);
