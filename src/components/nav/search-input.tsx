@@ -53,7 +53,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     if (pathname === '/search') return setValue(searchParams.get('query')?.toString() || '');
-  }, [searchParams]);
+  }, [searchParams, pathname]);
 
   useEffect(() => {
     if (pathname !== '/search') setValue('');

@@ -40,7 +40,7 @@ export default function SelectFilter({ items, placeholder, label, param }: {
 
   useEffect(() => {
     setSelected(searchParams.get(param)?.toString() || '');
-  }, [searchParams]);
+  }, [searchParams, param]);
 
   return (
     <Select value={selected}>
