@@ -63,6 +63,7 @@ export default function PaymentForm({ products, setDeliveryMethod, deliveryMetho
   const [show, setShow] = useState(false);
 
   const sellProducts = async () => {
+    setAlert('');
     if (products.length === 0) return setAlert("Nenhum produto selecionado.");
     if (deliveryMethod.method === '') return setAlert("Selecione uma forma de entrega.");
     console.log(deliveryMethod)

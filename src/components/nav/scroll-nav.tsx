@@ -50,6 +50,10 @@ export default function ScrollNav() {
 
   useEffect(() => { setSearchOpen(false) }, [pathname]);
 
+  useEffect(() => {
+    window.addEventListener("storage", () => setVisible(true));
+  }, []);
+
   return (
     <nav
       className={`${visible ? "translate-y-0" : "-translate-y-full delay-500"} transition-all

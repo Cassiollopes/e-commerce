@@ -55,8 +55,8 @@ export default function MenuMobile() {
           <Links />
         </div>
         <div className="flex items-center justify-between gap-2 w-full">
-          <ModeToggle className="w-1/4" />
-          <LogButton className="w-3/4"/>
+          <ModeToggle />
+          <LogButton className="w-full"/>
         </div>
         <SheetFooter>
           <SheetClose asChild>
