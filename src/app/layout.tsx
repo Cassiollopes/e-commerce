@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     default: 'Sla Store',
   },
   description: 'Site de vendas feito com Next.js por um estudante de programação.',
+  openGraph: {
+    images: [
+      'favicon.ico'
+    ]
+  }
 };
 
 export default function RootLayout({
