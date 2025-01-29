@@ -16,13 +16,6 @@ export const metadata: Metadata = {
     default: 'Sla Store',
   },
   description: 'Site de vendas feito com Next.js por um estudante de programação.',
-  openGraph: {
-    images: 'https://i.ibb.co/PCyXgj2/rb-27882.png',
-    type: 'website',
-    locale: 'pt_BR',
-    title: 'Sla Store',
-    description: 'Site de vendas feito com Next.js por um estudante de programação.',
-  }
 };
 
 export default function RootLayout({
