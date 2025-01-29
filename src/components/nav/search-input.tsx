@@ -19,10 +19,10 @@ const mostSearchProducts = [
     name: 'Eletronicos',
   },
   {
-    name: 'Celulares',
+    name: 'Celular',
   },
   {
-    name: 'Roupas',
+    name: 'Acessorios',
   },
 ]
 
