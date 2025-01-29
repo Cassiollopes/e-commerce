@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: '%s | Sla Store',
     default: 'Sla Store',
   },
-  description: 'The official Next.js Learn Dashboard built with App Router.',
+  description: 'Site de vendas feito com Next.js por um estudante de programação.',
 };
 
 export default function RootLayout({
