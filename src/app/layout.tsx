@@ -17,9 +17,11 @@ export const metadata: Metadata = {
   },
   description: 'Site de vendas feito com Next.js por um estudante de programação.',
   openGraph: {
-    images: [
-      'favicon.ico'
-    ]
+    images: 'https://e-commerce-rho-eosin.vercel.app/',
+    type: 'website',
+    locale: 'pt_BR',
+    title: 'Sla Store',
+    description: 'Site de vendas feito com Next.js por um estudante de programação.',
   }
 };
 

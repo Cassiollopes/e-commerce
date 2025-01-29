@@ -121,7 +121,7 @@ async function main() {
       Variant: {
         create: {
           color: 'Preto',
-          image: 'https://i.ibb.co/PCyXgj2/rb-27882.png',
+          image: 'e',
           Size: {
             create: { name: 'Unico', stock: 10 }
           },
