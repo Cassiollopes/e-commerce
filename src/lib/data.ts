@@ -5,7 +5,7 @@ import { prisma } from "./db";
 
 export const getProductsCard = async (): Promise<ProductCardType[]> => {
   try {
-    const products = await prisma.product.findMany({
+    await prisma.product.findMany({
       select: {
         id: true,
         name: true,
