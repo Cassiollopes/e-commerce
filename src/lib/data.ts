@@ -5,7 +5,7 @@ import { prisma } from "./db";
 
 export const getProductsCard = async (): Promise<ProductCardType[]> => {
   try {
-    await prisma.product.findMany({
+    const products = await prisma.product.findMany({
       select: {
         id: true,
         name: true,
@@ -13,7 +13,7 @@ export const getProductsCard = async (): Promise<ProductCardType[]> => {
         image: true,
       },
     });
-    throw new Error("Erro ao buscar produtos.");
+    return products;
   } catch (error) {
     console.log(error);
     throw new Error("Erro ao buscar produtos.");
