@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation"
 import CartProduct from "./cart-product"
 import { useEffect, useState } from "react"
 import { CartItemType } from "@/types"
-import PriceFormatter from "@/lib/price-formatter"
+import PriceFormatter from "@/lib/utils"
 
 export default function Cart() {
   const [products, setProducts] = useState<CartItemType[]>([])

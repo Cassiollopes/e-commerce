@@ -1,5 +1,5 @@
 import { getSalesCards } from "@/lib/data";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 import { DollarSign, Receipt, UsersRound } from "lucide-react";
 
 export default async function DashboardCards() {

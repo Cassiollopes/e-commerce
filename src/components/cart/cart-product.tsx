@@ -7,7 +7,7 @@ import Image from "next/image";
 import { handle1Item, handleRemoveItem } from "@/lib/local-storage";
 import { useState } from "react";
 import { CartItemType } from "@/types";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 
 export default function CartProduct({ checkout, product }: { checkout?: boolean, product: CartItemType }) {
   const [disabled, setDisabled] = useState(false);

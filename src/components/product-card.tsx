@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ProductCardType } from "../types";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 
 export default function ProductCard({ product, ...props }: {
   product?: ProductCardType

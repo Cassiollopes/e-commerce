@@ -1,7 +1,7 @@
 import { ShoppingBag } from "lucide-react";
 import { getLastSales } from "@/lib/data";
 import SalesAvatar from "../sales-avatar";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 
 export default async function LastSales() {
   const sales = await getLastSales();

@@ -7,7 +7,7 @@ import MobileResume from "./mobile-resume";
 import PaymentForm from "./payment-form";
 import { useEffect, useState } from "react";
 import { CartItemType } from "@/types";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 import { Logo } from "../logo";
 
 export default function Checkout() {

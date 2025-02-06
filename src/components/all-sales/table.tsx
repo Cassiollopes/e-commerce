@@ -9,7 +9,7 @@ import {
 import { getSalesPaginated } from "@/lib/data";
 import { Card } from "../ui/card";
 import SalesAvatar from "../sales-avatar";
-import PriceFormatter from "@/lib/price-formatter";
+import PriceFormatter from "@/lib/utils";
 import { AlertCircle } from "lucide-react";
 
 export default async function SalesTable({ page, query }: { page?: string, query?: string }) {
