@@ -13,7 +13,7 @@ export const getProductsCard = async (): Promise<ProductCardType[]> => {
         image: true,
       },
     });
-    return products;
+    throw new Error("Erro ao buscar produtos.");
   } catch (error) {
     console.log(error);
     throw new Error("Erro ao buscar produtos.");
