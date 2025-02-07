@@ -1,5 +1,5 @@
-import { getProductsCard } from '@/lib/data';
-import ProductCard from '../product-card';
+import { getProductsCard } from "@/lib/data";
+import ProductCard from "../product-card";
 
 export async function Carousel() {
   const products = await getProductsCard();

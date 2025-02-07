@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "../styles/globals.css";
-import { ThemeProvider } from "@/components/ui/theme-provider"
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { Suspense } from "react";
 
@@ -12,10 +12,11 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Sla Store',
-    default: 'Sla Store',
+    template: "%s | Sla Store",
+    default: "Sla Store",
   },
-  description: 'Site de vendas feito com Next.js por um estudante de programação.',
+  description:
+    "Site de vendas feito com Next.js por um estudante de programação.",
 };
 
 export default function RootLayout({
@@ -25,18 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body
-        className={`${geistSans.className} antialiased`}
-      >
+      <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           disableTransitionOnChange
         >
           <SessionProvider>
-            <Suspense>
-              {children}
-            </Suspense>
+            <Suspense>{children}</Suspense>
           </SessionProvider>
         </ThemeProvider>
       </body>

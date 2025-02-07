@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Input } from "../ui/input";
@@ -12,9 +12,9 @@ export default function SalesSearch() {
   async function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
   }
@@ -27,9 +27,9 @@ export default function SalesSearch() {
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
-        defaultValue={searchParams.get('query')?.toString()}
+        defaultValue={searchParams.get("query")?.toString()}
       />
       <Search className="h-4 w-4 absolute right-3" />
     </div>
-  )
+  );
 }

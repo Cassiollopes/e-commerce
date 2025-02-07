@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0 max-w-[100vw] overflow-hidden">
       <Suspense fallback={<CardsSkeleton />}>
@@ -23,7 +22,7 @@ export default function Page() {
         <Linear />
       </div>
     </div>
-  )
+  );
 }
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";

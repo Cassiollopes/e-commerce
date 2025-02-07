@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Minus, Plus, X } from "lucide-react";
 import { Button } from "../ui/button";
@@ -9,17 +9,23 @@ import { useState } from "react";
 import { CartItemType } from "@/types";
 import PriceFormatter from "@/lib/utils";
 
-export default function CartProduct({ checkout, product }: { checkout?: boolean, product: CartItemType }) {
+export default function CartProduct({
+  checkout,
+  product,
+}: {
+  checkout?: boolean;
+  product: CartItemType;
+}) {
   const [disabled, setDisabled] = useState(false);
 
   const handleAddItem = async () => {
     const add = await handle1Item(product, "add");
-    if(add?.error) setDisabled(true);
+    if (add?.error) setDisabled(true);
   };
 
   const handleRemoveOneItem = () => {
     handle1Item(product, "remove");
-    if(disabled) setDisabled(false);
+    if (disabled) setDisabled(false);
   };
 
   return (
@@ -41,11 +47,17 @@ export default function CartProduct({ checkout, product }: { checkout?: boolean,
           className="h-6 w-6 p-2 absolute -top-1 -left-1 font-bold"
           onClick={() => handleRemoveItem(product)}
         >
-          {checkout ? product?.quantity : <X className="text-muted-foreground"/>}
+          {checkout ? (
+            product?.quantity
+          ) : (
+            <X className="text-muted-foreground" />
+          )}
         </Button>
         <div className="grid content-start">
           <h2 className="font-bold truncate">{product?.productName}</h2>
-          <h3 className="text-sm text-muted-foreground truncate">{product?.variantColor} / {product?.sizeName}</h3>
+          <h3 className="text-sm text-muted-foreground truncate">
+            {product?.variantColor} / {product?.sizeName}
+          </h3>
         </div>
       </div>
       <div className="flex flex-col items-end w-1/2 whitespace-nowrap">
@@ -73,5 +85,5 @@ export default function CartProduct({ checkout, product }: { checkout?: boolean,
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Search"
+  title: "Search",
 };
 
 export default async function Search(props: {
@@ -17,9 +17,9 @@ export default async function Search(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const query = searchParams?.query || '';
-  const category = searchParams?.category || '';
-  const price = searchParams?.price || '';
+  const query = searchParams?.query || "";
+  const category = searchParams?.category || "";
+  const price = searchParams?.price || "";
 
   return (
     <div
@@ -27,10 +27,19 @@ export default async function Search(props: {
       px-4 max-md:gap-2 gap-8 max-md:grid-cols-1"
     >
       <CategoryFilter className="col-span-1 md:col-span-2 lg:col-span-1" />
-      <Suspense fallback={<ProductsListSkeleton className="max-md:order-3 md:col-span-6" />}>
-        <ProductsList query={query} category={category} price={price} className="max-md:order-3 md:col-span-6" />
+      <Suspense
+        fallback={
+          <ProductsListSkeleton className="max-md:order-3 md:col-span-6" />
+        }
+      >
+        <ProductsList
+          query={query}
+          category={category}
+          price={price}
+          className="max-md:order-3 md:col-span-6"
+        />
       </Suspense>
       <PriceFilter className="col-span-1 md:col-span-2 lg:col-span-1 max-md:pb-2" />
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import SelectFilter from "./select-filter";
@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 import { getCategories } from "@/lib/data";
 import { Skeleton } from "../ui/skeleton";
 
-export default function CategoryFilter({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export default function CategoryFilter({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const [categories, setCategories] = useState<CategoryType[]>();
 
   const searchParams = useSearchParams();
@@ -17,14 +19,16 @@ export default function CategoryFilter({ ...props }: React.HTMLAttributes<HTMLDi
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
-    params.set('category', term);
-    params.delete('query');
+    params.set("category", term);
+    params.delete("query");
 
     replace(`${pathname}?${params.toString()}`);
   }
 
   useEffect(() => {
-    getCategories().then((result) => setCategories([{ name: 'tudo' }, ...result]));
+    getCategories().then((result) =>
+      setCategories([{ name: "tudo" }, ...result]),
+    );
   }, []);
 
   return (
@@ -52,8 +56,8 @@ export default function CategoryFilter({ ...props }: React.HTMLAttributes<HTMLDi
         param="category"
         placeholder="Selecione uma Categoria"
         label="Categoria"
-        items={categories || [{ name: 'carregando...' }]}
+        items={categories || [{ name: "carregando..." }]}
       />
     </div>
-  )
+  );
 }

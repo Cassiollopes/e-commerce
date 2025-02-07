@@ -13,10 +13,15 @@ export default async function LastSales() {
         <ShoppingBag className="h-5 w-5" />
       </div>
       <ul className="flex flex-col w-full">
-        {sales.map(sale => (
-          <li key={sale.id} className="flex items-start justify-between gap-2 w-full border-b py-3">
+        {sales.map((sale) => (
+          <li
+            key={sale.id}
+            className="flex items-start justify-between gap-2 w-full border-b py-3"
+          >
             <SalesAvatar sale={{ user: sale.User, userId: sale.userId }} />
-            <span className="font-bold whitespace-nowrap">+ {PriceFormatter(sale.total)}</span>
+            <span className="font-bold whitespace-nowrap">
+              + {PriceFormatter(sale.total)}
+            </span>
           </li>
         ))}
       </ul>

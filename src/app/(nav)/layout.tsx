@@ -1,13 +1,8 @@
-import Footer from "@/components/footer"
-import NavBar from "@/components/nav/nav-bar"
-import ScrollNav from "@/components/nav/scroll-nav"
+import Footer from "@/components/footer";
+import NavBar from "@/components/nav/nav-bar";
+import ScrollNav from "@/components/nav/scroll-nav";
 
-
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <ScrollNav />
@@ -17,5 +12,5 @@ export default function Layout({
         <Footer />
       </div>
     </>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import UserMenu from "../menu/user-menu";
 import Links from "./links";
@@ -21,7 +21,7 @@ export default function NavBar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  })
+  });
 
   return (
     <nav
@@ -47,5 +47,5 @@ export default function NavBar() {
         <Cart />
       </div>
     </nav>
-  )
+  );
 }

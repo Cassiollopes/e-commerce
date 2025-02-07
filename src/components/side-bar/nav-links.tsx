@@ -1,9 +1,6 @@
-"use client"
+"use client";
 
-import {
-  type LucideIcon,
-} from "lucide-react"
-
+import { type LucideIcon } from "lucide-react";
 
 import {
   SidebarGroup,
@@ -11,19 +8,18 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
 
 export function NavLinks({
   links,
 }: {
   links: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
+    name: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
 }) {
-
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Links</SidebarGroupLabel>
@@ -40,5 +36,5 @@ export function NavLinks({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }

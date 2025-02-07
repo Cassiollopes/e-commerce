@@ -1,22 +1,17 @@
-"use client"
+"use client";
 
-import { ChartNoAxesColumn } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
+import { ChartNoAxesColumn } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { useEffect, useState } from "react"
-import { getSalesDate } from "@/lib/data"
+} from "@/components/ui/chart";
+import { useEffect, useState } from "react";
+import { getSalesDate } from "@/lib/data";
 
 const chartConfig = {
   activities: {
@@ -26,25 +21,24 @@ const chartConfig = {
     label: "R$",
     color: "hsl(var(--chart-1))",
   },
-} satisfies ChartConfig
-
+} satisfies ChartConfig;
 
 export default function Linear() {
-  const [sales, setSales] = useState<{ total: number, createdAt: Date }[]>([])
+  const [sales, setSales] = useState<{ total: number; createdAt: Date }[]>([]);
 
   useEffect(() => {
-    getSalesDate().then(sale => {
-      setSales(sale)
-    })
-  }, [])
+    getSalesDate().then((sale) => {
+      setSales(sale);
+    });
+  }, []);
 
   const chartData = Array.from({ length: 6 }, (_, index) => ({
-    month: new Date(0, index).toLocaleString('pt-BR', { month: 'long' }),
+    month: new Date(0, index).toLocaleString("pt-BR", { month: "long" }),
     total: 0,
-    sales: 0
+    sales: 0,
   }));
 
-  sales.forEach(sale => {
+  sales.forEach((sale) => {
     const month = sale.createdAt.getMonth();
     chartData[month].total += sale.total;
     chartData[month].sales += 1;
@@ -59,7 +53,10 @@ export default function Linear() {
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 flex-1">
-        <ChartContainer config={chartConfig} className="h-full w-full overflow-hidden">
+        <ChartContainer
+          config={chartConfig}
+          className="h-full w-full overflow-hidden"
+        >
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -83,9 +80,7 @@ export default function Linear() {
               />
             </Bar>
             <ChartTooltip
-              content={
-                <ChartTooltipContent indicator="line" />
-              }
+              content={<ChartTooltipContent indicator="line" />}
               cursor={false}
               defaultIndex={new Date().getMonth()}
             />
@@ -93,5 +88,5 @@ export default function Linear() {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

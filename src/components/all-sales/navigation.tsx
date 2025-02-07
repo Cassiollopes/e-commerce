@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Pagination,
@@ -7,12 +7,18 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 import { getNumberOfPages } from "@/lib/data";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Navigation({ query, page }: { query?: string, page?: string }) {
+export default function Navigation({
+  query,
+  page,
+}: {
+  query?: string;
+  page?: string;
+}) {
   const { replace } = useRouter();
   const [pages, setPages] = useState(0);
 
@@ -23,9 +29,9 @@ export default function Navigation({ query, page }: { query?: string, page?: str
   const handleClick = (operation?: { remove?: boolean }) => {
     const newCount = operation?.remove ? count - 1 : count + 1;
 
-    if (pages === 0) return
-    if (newCount < 1) return
-    if (newCount > pages) return
+    if (pages === 0) return;
+    if (newCount < 1) return;
+    if (newCount > pages) return;
 
     setCount(newCount);
     replace(`?page=${newCount}`);
@@ -39,21 +45,29 @@ export default function Navigation({ query, page }: { query?: string, page?: str
     <Pagination>
       {pages ? (
         <PaginationContent>
-          {count > 1 &&
+          {count > 1 && (
             <PaginationItem>
-              <PaginationPrevious className="hover:cursor-pointer" onClick={() => handleClick({ remove: true })} />
+              <PaginationPrevious
+                className="hover:cursor-pointer"
+                onClick={() => handleClick({ remove: true })}
+              />
             </PaginationItem>
-          }
+          )}
           <PaginationItem>
             <PaginationLink className="hover:bg-transparent">{`${count} de ${pages}`}</PaginationLink>
           </PaginationItem>
-          {count < pages &&
+          {count < pages && (
             <PaginationItem>
-              <PaginationNext className="hover:cursor-pointer" onClick={() => handleClick()} />
+              <PaginationNext
+                className="hover:cursor-pointer"
+                onClick={() => handleClick()}
+              />
             </PaginationItem>
-          }
+          )}
         </PaginationContent>
-      ) : "..."}
+      ) : (
+        "..."
+      )}
     </Pagination>
   );
 }

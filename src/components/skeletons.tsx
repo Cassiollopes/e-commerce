@@ -1,8 +1,17 @@
 import { Card } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
 
-export function ProductCardSkeleton({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function ProductCardSkeleton({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`relative w-full h-full ${props.className}`}>
       <Skeleton className="w-full h-full rounded-xl" />
@@ -18,7 +27,7 @@ export function ThreeProductsSkeleton() {
       <ProductCardSkeleton className="col-span-1 row-span-2 max-md:aspect-square" />
       <ProductCardSkeleton className="col-span-1 row-span-2 max-md:aspect-square" />
     </div>
-  )
+  );
 }
 
 export function CarouselSkeleton() {
@@ -38,7 +47,9 @@ export function CarouselSkeleton() {
   );
 }
 
-export function ProductsListSkeleton({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function ProductsListSkeleton({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`${props.className} w-full`}>
       <ul className="gap-4 h-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -52,14 +63,20 @@ export function ProductsListSkeleton({ ...props }: React.HTMLAttributes<HTMLDivE
   );
 }
 
-export function ProductIdGallerySkeleton({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function ProductIdGallerySkeleton({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`grid h-full justify-items-center gap-8 ${props.className}`}>
+    <div
+      className={`grid h-full justify-items-center gap-8 ${props.className}`}
+    >
       <Card className="w-full max-w-[400px] aspect-square">
         <Skeleton className="h-full w-full" />
       </Card>
       <ul className="flex gap-2 h-full w-full justify-center items-center">
-        <Card className={`aspect-square w-full max-w-[80px] hover:cursor-pointer hover:border-blue-500 `}>
+        <Card
+          className={`aspect-square w-full max-w-[80px] hover:cursor-pointer hover:border-blue-500 `}
+        >
           <Skeleton className="h-full w-full" />
         </Card>
       </ul>
@@ -98,7 +115,7 @@ export function ProductIdDescSkeleton() {
       <Skeleton className="w-full h-6" />
       <Skeleton className="w-full h-14 mt-2 rounded-full" />
     </div>
-  )
+  );
 }
 
 export function ProductIdSkeleton() {
@@ -139,7 +156,7 @@ export default function CardsSkeleton() {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 export function SalesAvatarSkeleton() {
@@ -151,7 +168,7 @@ export function SalesAvatarSkeleton() {
         <div className="h-4 w-10 bg-muted/50 rounded-full mt-1" />
       </div>
     </div>
-  )
+  );
 }
 
 export function LastSalesSkeleton() {
@@ -163,7 +180,10 @@ export function LastSalesSkeleton() {
       </div>
       <ul className="flex flex-col w-full">
         {[...Array(5)].map((_, i) => (
-          <li key={i} className="flex items-start justify-between gap-2 w-full border-b py-3">
+          <li
+            key={i}
+            className="flex items-start justify-between gap-2 w-full border-b py-3"
+          >
             <SalesAvatarSkeleton />
             <Skeleton className="w-1/3 h-6" />
           </li>

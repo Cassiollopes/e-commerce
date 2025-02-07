@@ -1,18 +1,8 @@
-"use client"
+"use client";
 
-import {
-  ChevronsUpDown,
-  LogIn,
-  LogOut,
-  Moon,
-  Sun,
-} from "lucide-react"
+import { ChevronsUpDown, LogIn, LogOut, Moon, Sun } from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,25 +11,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { signIn, signOut, useSession } from "next-auth/react"
-import { useTheme } from "next-themes"
-import { usePathname, useRouter } from "next/navigation"
+} from "@/components/ui/sidebar";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
+import { usePathname, useRouter } from "next/navigation";
 
 export function NavUser() {
-  const { isMobile } = useSidebar()
-  const { data: session } = useSession()
-  const { setTheme } = useTheme()
-  const { replace } = useRouter()
-  const pathname = usePathname()
+  const { isMobile } = useSidebar();
+  const { data: session } = useSession();
+  const { setTheme } = useTheme();
+  const { replace } = useRouter();
+  const pathname = usePathname();
 
-  const user = session?.user 
+  const user = session?.user;
 
   return (
     <SidebarMenu className="max-md:pb-4">
@@ -56,7 +46,9 @@ export function NavUser() {
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user?.name ? user.name : "Entrar"}</span>
+                <span className="truncate font-semibold">
+                  {user?.name ? user.name : "Entrar"}
+                </span>
                 <span className="truncate text-xs">{user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -83,13 +75,25 @@ export function NavUser() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem onClick={() => document.documentElement.classList.contains("dark") ? setTheme("light") : setTheme("dark")}>
-                  {document.documentElement.classList.contains("dark") ? <Sun /> : <Moon />}
+                <DropdownMenuItem
+                  onClick={() =>
+                    document.documentElement.classList.contains("dark")
+                      ? setTheme("light")
+                      : setTheme("dark")
+                  }
+                >
+                  {document.documentElement.classList.contains("dark") ? (
+                    <Sun />
+                  ) : (
+                    <Moon />
+                  )}
                   Tema
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()}>
+              <DropdownMenuItem
+                onClick={() => (session?.user ? signOut() : signIn())}
+              >
                 {session?.user ? <LogOut /> : <LogIn />}
                 {session?.user ? "Logout" : "Login"}
               </DropdownMenuItem>
@@ -98,5 +102,5 @@ export function NavUser() {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Search, TextSearch } from "lucide-react";
 import { Input } from "../ui/input";
@@ -13,18 +13,18 @@ import { ProductFiltered } from "@/types";
 
 const mostSearchProducts = [
   {
-    name: 'Camisetas',
+    name: "Camisetas",
   },
   {
-    name: 'Eletronicos',
+    name: "Eletronicos",
   },
   {
-    name: 'Celular',
+    name: "Celular",
   },
   {
-    name: 'Acessorios',
+    name: "Acessorios",
   },
-]
+];
 
 export default function SearchInput() {
   const searchParams = useSearchParams();
@@ -33,16 +33,16 @@ export default function SearchInput() {
 
   const [products, setProducts] = useState<ProductFiltered[]>([]);
   const [showList, setShowList] = useState(false);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
 
   async function handleSearch(term: string) {
     setValue(term);
 
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
 
@@ -52,11 +52,12 @@ export default function SearchInput() {
   }
 
   useEffect(() => {
-    if (pathname === '/search') return setValue(searchParams.get('query')?.toString() || '');
+    if (pathname === "/search")
+      return setValue(searchParams.get("query")?.toString() || "");
   }, [searchParams, pathname]);
 
   useEffect(() => {
-    if (pathname !== '/search') setValue('');
+    if (pathname !== "/search") setValue("");
   }, [pathname]);
 
   useEffect(() => {
@@ -65,11 +66,11 @@ export default function SearchInput() {
         document.activeElement.blur();
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="relative flex items-center flex-1">
@@ -81,24 +82,28 @@ export default function SearchInput() {
         }}
         value={value}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             e.currentTarget.blur();
-            if (pathname !== '/search') replace(`/search?query=${e.currentTarget.value}`);
+            if (pathname !== "/search")
+              replace(`/search?query=${e.currentTarget.value}`);
           }
         }}
         onFocus={() => setShowList(true)}
-        onBlur={() => { setShowList(false); setProducts([]) }}
+        onBlur={() => {
+          setShowList(false);
+          setProducts([]);
+        }}
         autoCapitalize="off"
         enterKeyHint="enter"
       />
       <Search className="h-4 w-4 absolute right-3" />
       <AnimatePresence>
-        {showList && pathname !== '/search' && (
-          <motion.div 
+        {showList && pathname !== "/search" && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: .3, ease: 'easeInOut' }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="bg-background border shadow-2xl rounded-2xl absolute z-40 top-12 left w-full p-4"
           >
             {products?.length === 0 && (
@@ -126,7 +131,10 @@ export default function SearchInput() {
               <ul className="flex flex-col gap-2">
                 {products.map((product, i) => (
                   <li key={i}>
-                    <Link href={`/product/${product.id}`} className="group flex justify-between items-center gap-2 border-b pb-2 p-1">
+                    <Link
+                      href={`/product/${product.id}`}
+                      className="group flex justify-between items-center gap-2 border-b pb-2 p-1"
+                    >
                       <Card className="max-w-[70px] aspect-square group-hover:border-blue-500 transition ease-linear duration-150">
                         <Image
                           src={product.image ?? ""}
@@ -140,7 +148,9 @@ export default function SearchInput() {
                       </Card>
                       <div className="flex flex-col items-end">
                         <h2 className="font-bold">{product.name}</h2>
-                        <h3 className="text-sm text-muted-foreground">{product.description}</h3>
+                        <h3 className="text-sm text-muted-foreground">
+                          {product.description}
+                        </h3>
                       </div>
                     </Link>
                   </li>
@@ -151,5 +161,5 @@ export default function SearchInput() {
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }

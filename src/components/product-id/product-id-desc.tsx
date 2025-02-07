@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
@@ -6,23 +6,33 @@ import { useEffect, useState } from "react";
 import { handleSetItem } from "@/lib/local-storage";
 import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
 import { CartItemType, ProductDescType } from "@/types";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 
-export default function ProductIdDesc({ product }: { product: ProductDescType }) {
+export default function ProductIdDesc({
+  product,
+}: {
+  product: ProductDescType;
+}) {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | undefined>();
   const [quantity, setQuantity] = useState(1);
 
   const [loading, setLoading] = useState(false);
 
-  const stock = selectedSize === undefined ? 0 : product.Variant[selectedVariant].Size[selectedSize].stock
+  const stock =
+    selectedSize === undefined
+      ? 0
+      : product.Variant[selectedVariant].Size[selectedSize].stock;
 
   useEffect(() => {
     const currentVariantSizes = product.Variant[selectedVariant].Size;
 
-    if (selectedSize === undefined || currentVariantSizes[selectedSize]?.stock <= 0) {
-      const sizeIndex = currentVariantSizes.findIndex(size => size.stock > 0);
+    if (
+      selectedSize === undefined ||
+      currentVariantSizes[selectedSize]?.stock <= 0
+    ) {
+      const sizeIndex = currentVariantSizes.findIndex((size) => size.stock > 0);
       if (sizeIndex !== -1) {
         setSelectedSize(sizeIndex);
       } else {
@@ -48,10 +58,10 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
       sizeId: product.Variant[selectedVariant].Size[selectedSize].id,
       sizeName: product.Variant[selectedVariant].Size[selectedSize].name,
       quantity: quantity,
-      price: product.price
-    }
+      price: product.price,
+    };
 
-    const response = await handleSetItem(cartItem)
+    const response = await handleSetItem(cartItem);
 
     if (response?.error) {
       toast.error(response.error);
@@ -60,13 +70,15 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
 
     toast.success("Produto adicionado ao carrinho");
     setLoading(false);
-  }
+  };
 
   return (
     <div className="max-md:mt-4 flex gap-4 flex-col">
       <div className="border-b pb-4">
         <h2 className="max-lg:text-3xl text-5xl font-bold">{product.name}</h2>
-        <span className="max-lg:text-2xl text-3xl font-bold text-muted-foreground">R$ {product.price}</span>
+        <span className="max-lg:text-2xl text-3xl font-bold text-muted-foreground">
+          R$ {product.price}
+        </span>
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-2xl font-bold">Cor</h3>
@@ -76,7 +88,8 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
               <Button
                 variant={"outline"}
                 className={selectedVariant === i ? "border-blue-500" : ""}
-                onClick={() => setSelectedVariant(i)}>
+                onClick={() => setSelectedVariant(i)}
+              >
                 {variant.color}
               </Button>
             </li>
@@ -86,44 +99,40 @@ export default function ProductIdDesc({ product }: { product: ProductDescType })
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">Tamanho</h3>
         <ul className="flex gap-2 flex-wrap">
-          {product.Variant[selectedVariant].Size
-            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-            .map((size, i) => (
-              <li key={i}>
-                <Button
-                  variant={"outline"}
-                  className={`${selectedSize === i ? "border-blue-500" : ""} relative`}
-                  onClick={() => setSelectedSize(i)}
-                  disabled={size.stock <= 0}
-                >
-                  {size.name}
-                </Button>
-              </li>
-            ))}
+          {product.Variant[selectedVariant].Size.sort(
+            (a, b) => (a.order ?? 0) - (b.order ?? 0),
+          ).map((size, i) => (
+            <li key={i}>
+              <Button
+                variant={"outline"}
+                className={`${selectedSize === i ? "border-blue-500" : ""} relative`}
+                onClick={() => setSelectedSize(i)}
+                disabled={size.stock <= 0}
+              >
+                {size.name}
+              </Button>
+            </li>
+          ))}
         </ul>
         <Select onValueChange={(e) => setQuantity(parseInt(e))}>
           <SelectTrigger className="w-full">
-            {`${selectedSize !== undefined
-              ? `Quantidade: ${quantity} | (${stock})Disponíveis`
-              : "Nenhum tamanho disponível"
-              }`}
+            {`${
+              selectedSize !== undefined
+                ? `Quantidade: ${quantity} | (${stock})Disponíveis`
+                : "Nenhum tamanho disponível"
+            }`}
           </SelectTrigger>
-          {selectedSize !== undefined &&
+          {selectedSize !== undefined && (
             <SelectContent>
               <ul className="flex flex-col gap-2 p-2">
-                {
-                  Array.from({ length: stock }, (_, i) => i + 1).map((i) => (
-                    <SelectItem
-                      key={i}
-                      value={`${i}`}
-                    >
-                      {i} unidades
-                    </SelectItem>
-                  ))
-                }
+                {Array.from({ length: stock }, (_, i) => i + 1).map((i) => (
+                  <SelectItem key={i} value={`${i}`}>
+                    {i} unidades
+                  </SelectItem>
+                ))}
               </ul>
             </SelectContent>
-          }
+          )}
         </Select>
       </div>
       <p className="text-muted-foreground">{product.description}</p>

@@ -5,14 +5,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import { getSalesPaginated } from "@/lib/data";
 import { Card } from "../ui/card";
 import SalesAvatar from "../sales-avatar";
 import PriceFormatter from "@/lib/utils";
 import { AlertCircle } from "lucide-react";
 
-export default async function SalesTable({ page, query }: { page?: string, query?: string }) {
+export default async function SalesTable({
+  page,
+  query,
+}: {
+  page?: string;
+  query?: string;
+}) {
   const sales = await getSalesPaginated(Number(page) || 1, query);
 
   return (
@@ -36,17 +42,19 @@ export default async function SalesTable({ page, query }: { page?: string, query
               <TableCell>{sale.payment_method}</TableCell>
               <TableCell>{sale.createdAt.toLocaleDateString()}</TableCell>
               <TableCell>{sale.delivery_method}</TableCell>
-              <TableCell className="text-right">{PriceFormatter(sale.total)}</TableCell>
+              <TableCell className="text-right">
+                {PriceFormatter(sale.total)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      {sales.length === 0 &&
+      {sales.length === 0 && (
         <span className="gap-1 py-4 text-sm  flex items-center justify-center">
           <AlertCircle className="h-4 w-4" />
           Nenhuma resultado para {`"${query}"`} em vendas.
         </span>
-      }
+      )}
     </Card>
-  )
+  );
 }

@@ -3,11 +3,12 @@ import PriceFormatter from "@/lib/utils";
 import { DollarSign, Receipt, UsersRound } from "lucide-react";
 
 export default async function DashboardCards() {
-
   const sales = await getSalesCards();
 
   const totalSales = sales.reduce((acc, sale) => acc + sale.total, 0);
-  const totalUsers = Array.from(new Set(sales.flatMap(sale => sale.userId))).length;
+  const totalUsers = Array.from(
+    new Set(sales.flatMap((sale) => sale.userId)),
+  ).length;
 
   const cardItems = [
     {
@@ -24,7 +25,8 @@ export default async function DashboardCards() {
       title: "Clientes:",
       value: totalUsers,
       icon: <UsersRound className="w-5 h-5" />,
-    }]
+    },
+  ];
 
   return (
     <ul className="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -40,5 +42,5 @@ export default async function DashboardCards() {
         </li>
       ))}
     </ul>
-  )
+  );
 }

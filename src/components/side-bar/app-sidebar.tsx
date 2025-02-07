@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   Frame,
   Home,
   LayoutDashboard,
   MonitorSmartphone,
   Shirt,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavMain } from "@/components/side-bar/nav-main"
-import { NavLinks } from "@/components/side-bar/nav-links"
-import { NavUser } from "@/components/side-bar/nav-user"
+import { NavMain } from "@/components/side-bar/nav-main";
+import { NavLinks } from "@/components/side-bar/nav-links";
+import { NavUser } from "@/components/side-bar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -19,8 +19,8 @@ import {
   SidebarHeader,
   SidebarMenuButton,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { Logo, LogoText } from "../logo"
+} from "@/components/ui/sidebar";
+import { Logo, LogoText } from "../logo";
 
 const data = {
   navMain: [
@@ -73,7 +73,7 @@ const data = {
       icon: MonitorSmartphone,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -101,5 +101,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

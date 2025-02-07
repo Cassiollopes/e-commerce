@@ -4,7 +4,7 @@ import Checkout from "@/components/checkout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Checkout"
+  title: "Checkout",
 };
 
 export default async function CheckoutPage() {

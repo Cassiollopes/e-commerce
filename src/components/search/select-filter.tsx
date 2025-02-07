@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Select,
@@ -7,39 +7,44 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type item = {
-  name: string,
-  id?: string
-}
+  name: string;
+  id?: string;
+};
 
-export default function SelectFilter({ items, placeholder, label, param }: {
-  items: item[],
-  placeholder: string,
-  label: string,
-  param: string
+export default function SelectFilter({
+  items,
+  placeholder,
+  label,
+  param,
+}: {
+  items: item[];
+  placeholder: string;
+  label: string;
+  param: string;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const [selected, setSelected] = useState<string>('');
+  const [selected, setSelected] = useState<string>("");
 
   function handleSearch(term: string) {
     setSelected(term);
     const params = new URLSearchParams(searchParams);
     params.set(param, term);
-    if(param === 'category') params.delete('query');
+    if (param === "category") params.delete("query");
 
     replace(`${pathname}?${params.toString()}`);
   }
 
   useEffect(() => {
-    setSelected(searchParams.get(param)?.toString() || '');
+    setSelected(searchParams.get(param)?.toString() || "");
   }, [searchParams, param]);
 
   return (
@@ -62,5 +67,5 @@ export default function SelectFilter({ items, placeholder, label, param }: {
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
+  );
 }
