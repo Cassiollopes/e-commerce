@@ -10,11 +10,11 @@ export type ProductDescType = {
   name: string;
   price: number;
   description: string;
-  Variant: {
+  variants: {
     id: string;
     color: string;
     image: string;
-    Size: {
+    sizes: {
       id: string;
       name: string;
       stock: number;
@@ -46,7 +46,7 @@ export type CategoryType = {
 export type CreateShoppingType = {
   payment_method: string;
   delivery_method: string;
-  userId: string;
+  user_id: string;
   total: number;
   products: { sizeId: string; quantity: number }[];
 };

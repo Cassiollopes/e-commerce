@@ -120,7 +120,7 @@ export default function PaymentForm({
     const response = await createShopping({
       delivery_method: deliveryMethod.method,
       payment_method: paymentMethod,
-      userId: session?.user?.email as string,
+      user_id: session?.user?.email as string,
       total: total,
       products: productsSealed,
     });

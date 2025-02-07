@@ -18,7 +18,7 @@ export default async function LastSales() {
             key={sale.id}
             className="flex items-start justify-between gap-2 w-full border-b py-3"
           >
-            <SalesAvatar sale={{ user: sale.User, userId: sale.userId }} />
+            <SalesAvatar sale={{ user: sale.user, userId: sale.user_id }} />
             <span className="font-bold whitespace-nowrap">
               + {PriceFormatter(sale.total)}
             </span>

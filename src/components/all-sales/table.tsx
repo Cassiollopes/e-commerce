@@ -37,7 +37,7 @@ export default async function SalesTable({
           {sales.map((sale) => (
             <TableRow key={sale.id}>
               <TableCell className="w-2/4 min-w-[250px]">
-                <SalesAvatar sale={{ user: sale.User, userId: sale.userId }} />
+                <SalesAvatar sale={{ user: sale.user, userId: sale.user_id }} />
               </TableCell>
               <TableCell>{sale.payment_method}</TableCell>
               <TableCell>{sale.createdAt.toLocaleDateString()}</TableCell>

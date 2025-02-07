@@ -7,7 +7,7 @@ export default async function DashboardCards() {
 
   const totalSales = sales.reduce((acc, sale) => acc + sale.total, 0);
   const totalUsers = Array.from(
-    new Set(sales.flatMap((sale) => sale.userId)),
+    new Set(sales.flatMap((sale) => sale.user_id)),
   ).length;
 
   const cardItems = [

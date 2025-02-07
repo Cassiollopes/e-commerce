@@ -23,10 +23,10 @@ export default function ProductIdDesc({
   const stock =
     selectedSize === undefined
       ? 0
-      : product.Variant[selectedVariant].Size[selectedSize].stock;
+      : product.variants[selectedVariant].sizes[selectedSize].stock;
 
   useEffect(() => {
-    const currentVariantSizes = product.Variant[selectedVariant].Size;
+    const currentVariantSizes = product.variants[selectedVariant].sizes;
 
     if (
       selectedSize === undefined ||
@@ -52,11 +52,11 @@ export default function ProductIdDesc({
     const cartItem: CartItemType = {
       productId: product.id,
       productName: product.name,
-      variantId: product.Variant[selectedVariant].id,
-      variantColor: product.Variant[selectedVariant].color,
-      variantImage: product.Variant[selectedVariant].image,
-      sizeId: product.Variant[selectedVariant].Size[selectedSize].id,
-      sizeName: product.Variant[selectedVariant].Size[selectedSize].name,
+      variantId: product.variants[selectedVariant].id,
+      variantColor: product.variants[selectedVariant].color,
+      variantImage: product.variants[selectedVariant].image,
+      sizeId: product.variants[selectedVariant].sizes[selectedSize].id,
+      sizeName: product.variants[selectedVariant].sizes[selectedSize].name,
       quantity: quantity,
       price: product.price,
     };
@@ -83,7 +83,7 @@ export default function ProductIdDesc({
       <div className="flex flex-col gap-2">
         <h3 className="text-2xl font-bold">Cor</h3>
         <ul className="flex gap-2 overflow-x-auto">
-          {product.Variant.map((variant: { color: string }, i: number) => (
+          {product.variants.map((variant: { color: string }, i: number) => (
             <li key={i}>
               <Button
                 variant={"outline"}
@@ -99,27 +99,27 @@ export default function ProductIdDesc({
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">Tamanho</h3>
         <ul className="flex gap-2 flex-wrap">
-          {product.Variant[selectedVariant].Size.sort(
-            (a, b) => (a.order ?? 0) - (b.order ?? 0),
-          ).map((size, i) => (
-            <li key={i}>
-              <Button
-                variant={"outline"}
-                className={`${selectedSize === i ? "border-blue-500" : ""} relative`}
-                onClick={() => setSelectedSize(i)}
-                disabled={size.stock <= 0}
-              >
-                {size.name}
-              </Button>
-            </li>
-          ))}
+          {product.variants[selectedVariant].sizes
+            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+            .map((size, i) => (
+              <li key={i}>
+                <Button
+                  variant={"outline"}
+                  className={`${selectedSize === i ? "border-blue-500" : ""} relative`}
+                  onClick={() => setSelectedSize(i)}
+                  disabled={size.stock <= 0}
+                >
+                  {size.name}
+                </Button>
+              </li>
+            ))}
         </ul>
         <Select onValueChange={(e) => setQuantity(parseInt(e))}>
           <SelectTrigger className="w-full">
             {`${
               selectedSize !== undefined
                 ? `Quantidade: ${quantity} | (${stock})Disponíveis`
-                : "Nenhum tamanho disponível"
+                : "Estoque indisponível."
             }`}
           </SelectTrigger>
           {selectedSize !== undefined && (

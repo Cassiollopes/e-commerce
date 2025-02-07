@@ -16,21 +16,21 @@ async function main() {
       price: 1999.99,
       description: "Um celular top de Linha",
       image: "https://i.ibb.co/RB71Lmm/mediamodifier-image-5.png",
-      ProductCategories: {
+      categories: {
         create: {
-          categoryName: "eletronicos",
+          category_name: "eletronicos",
         },
       },
-      Variant: {
+      variants: {
         create: {
           color: "Preto",
           image: "https://i.ibb.co/RB71Lmm/mediamodifier-image-5.png",
-          Size: {
+          sizes: {
             createMany: {
               data: [
-                { name: "128gb", stock: 10 },
-                { name: "256gb", stock: 5 },
-                { name: "512gb", stock: 3 },
+                { name: "128gb", stock: 10, order: 1 },
+                { name: "256gb", stock: 5, order: 2 },
+                { name: "512gb", stock: 3, order: 3 },
               ],
             },
           },
@@ -45,13 +45,13 @@ async function main() {
       price: 49.99,
       description: "Camiseta basicamente lisa",
       image: "https://i.ibb.co/7VQQMNN/mediamodifier-image-1.png",
-      ProductCategories: { create: { categoryName: "camisetas" } },
-      Variant: {
+      categories: { create: { category_name: "camisetas" } },
+      variants: {
         create: [
           {
             color: "Preto",
             image: "https://i.ibb.co/KWK22hV/mediamodifier-image-2.png",
-            Size: {
+            sizes: {
               createMany: {
                 data: [
                   { name: "P", stock: 3, order: 1 },
@@ -65,7 +65,7 @@ async function main() {
           {
             color: "Branco",
             image: "https://i.ibb.co/7VQQMNN/mediamodifier-image-1.png",
-            Size: {
+            sizes: {
               createMany: {
                 data: [
                   { name: "P", stock: 3, order: 1 },
@@ -87,12 +87,12 @@ async function main() {
       price: 29.99,
       description: "Xicrinha linda de bonita",
       image: "https://i.ibb.co/PtcTDxz/mediamodifier-image-4.png",
-      ProductCategories: { create: { categoryName: "outros" } },
-      Variant: {
+      categories: { create: { category_name: "outros" } },
+      variants: {
         create: {
           color: "Branco",
           image: "https://i.ibb.co/PtcTDxz/mediamodifier-image-4.png",
-          Size: {
+          sizes: {
             createMany: {
               data: [{ name: "Unico", stock: 8 }],
             },
@@ -108,19 +108,19 @@ async function main() {
       price: 149.99,
       description: "reloginho top",
       image: "https://i.ibb.co/PCyXgj2/rb-27882.png",
-      ProductCategories: {
+      categories: {
         createMany: {
           data: [
-            { categoryName: "eletronicos" },
-            { categoryName: "acessorios" },
+            { category_name: "eletronicos" },
+            { category_name: "acessorios" },
           ],
         },
       },
-      Variant: {
+      variants: {
         create: {
           color: "Preto",
           image: "https://i.ibb.co/PCyXgj2/rb-27882.png",
-          Size: {
+          sizes: {
             create: { name: "Unico", stock: 10 },
           },
         },
@@ -128,7 +128,7 @@ async function main() {
     },
   });
 
-  console.log({ categories, product1, product2, product3 });
+  console.log({ categories, product1, product2, product3, product4 });
 }
 main()
   .then(async () => {

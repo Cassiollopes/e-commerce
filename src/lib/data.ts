@@ -31,21 +31,23 @@ export const getProductVariantImages = async (id: string) => {
     const product = await prisma.product.findUnique({
       where: { id },
       select: {
-        Variant: {
+        variants: {
           select: {
             image: true,
           },
         },
       },
     });
-    return product?.Variant;
+    return product?.variants;
   } catch (error) {
     console.log(error);
     throw new Error("Erro ao buscar produtos.");
   }
 };
 
-export const getProductDesc = async (id: string): Promise<ProductDescType> => {
+export const getProductDesc = async (
+  id: string,
+): Promise<ProductDescType | null> => {
   try {
     const product = await prisma.product.findUnique({
       where: { id },
@@ -54,12 +56,12 @@ export const getProductDesc = async (id: string): Promise<ProductDescType> => {
         name: true,
         price: true,
         description: true,
-        Variant: {
+        variants: {
           select: {
             id: true,
             color: true,
             image: true,
-            Size: {
+            sizes: {
               select: {
                 id: true,
                 name: true,
@@ -72,7 +74,6 @@ export const getProductDesc = async (id: string): Promise<ProductDescType> => {
       },
     });
 
-    if (!product) throw new Error("Produto não encontrado.");
     return product;
   } catch (error) {
     console.log(error);
@@ -105,17 +106,17 @@ export const getProductsFiltered = async (
         OR: [
           { name: { contains: query || "", mode: "insensitive" } },
           {
-            ProductCategories: {
+            categories: {
               some: {
-                categoryName: { contains: query || "", mode: "insensitive" },
+                category_name: { contains: query || "", mode: "insensitive" },
               },
             },
           },
           { description: { contains: query || "", mode: "insensitive" } },
         ],
-        ProductCategories: {
+        categories: {
           some: {
-            categoryName: {
+            category_name: {
               equals: category === "tudo" ? undefined : category || undefined,
             },
           },
@@ -152,15 +153,11 @@ export const createShopping = async (data: CreateShoppingType) => {
           data: { stock: { decrement: product.quantity } },
         });
 
-        if (result.stock < 0) throw new Error("Estoque insuficiente.");
+        if (result.stock < 0) throw new Error("Estoque indisponível.");
       }
 
       for (const product of data.products) {
-        try {
-          await transaction(product);
-        } catch (error) {
-          throw new Error((error as Error).message);
-        }
+        await transaction(product);
       }
 
       try {
@@ -168,19 +165,20 @@ export const createShopping = async (data: CreateShoppingType) => {
           data: {
             delivery_method: data.delivery_method,
             payment_method: data.payment_method,
-            userId: data.userId,
+            user_id: data.user_id,
             total: data.total,
-            SaleProduct: {
+            sale_products: {
               createMany: {
                 data: data.products.map((product) => ({
-                  sizeId: product.sizeId,
+                  size_id: product.sizeId,
                   quantity: product.quantity,
                 })),
               },
             },
           },
         });
-      } catch {
+      } catch (error) {
+        console.log(error);
         throw new Error("Erro ao realizar compra.");
       }
     });
@@ -206,10 +204,10 @@ export const getSales = async () => {
     const sales = await prisma.sale.findMany({
       select: {
         id: true,
-        userId: true,
+        user_id: true,
         total: true,
         createdAt: true,
-        User: {
+        user: {
           select: {
             name: true,
             image: true,
@@ -229,7 +227,7 @@ export const getSalesCards = async () => {
     const sales = await prisma.sale.findMany({
       select: {
         id: true,
-        userId: true,
+        user_id: true,
         total: true,
       },
     });
@@ -264,9 +262,9 @@ export const getLastSales = async () => {
       take: 5,
       select: {
         id: true,
-        userId: true,
+        user_id: true,
         total: true,
-        User: {
+        user: {
           select: {
             name: true,
             image: true,
@@ -286,20 +284,20 @@ export const getSalesPaginated = async (page: number, query?: string) => {
     const sales = await prisma.sale.findMany({
       where: {
         OR: [
-          { User: { name: { contains: query || "", mode: "insensitive" } } },
-          { userId: { contains: query || "", mode: "insensitive" } },
+          { user: { name: { contains: query || "", mode: "insensitive" } } },
+          { user_id: { contains: query || "", mode: "insensitive" } },
         ],
       },
       skip: (page - 1) * 5,
       take: 5,
       select: {
         id: true,
-        userId: true,
+        user_id: true,
         total: true,
         payment_method: true,
         delivery_method: true,
         createdAt: true,
-        User: {
+        user: {
           select: {
             name: true,
             image: true,
@@ -319,8 +317,8 @@ export const getNumberOfPages = async (query?: string) => {
     const salesCount = await prisma.sale.count({
       where: {
         OR: [
-          { User: { name: { contains: query || "", mode: "insensitive" } } },
-          { userId: { contains: query || "", mode: "insensitive" } },
+          { user: { name: { contains: query || "", mode: "insensitive" } } },
+          { user_id: { contains: query || "", mode: "insensitive" } },
         ],
       },
     });
