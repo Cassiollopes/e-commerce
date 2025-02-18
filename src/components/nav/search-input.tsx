@@ -7,7 +7,12 @@ import { useEffect, useState } from "react";
 import { getProductsFiltered } from "@/lib/data";
 import { Card } from "../ui/card";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 import Link from "next/link";
 import { ProductFiltered } from "@/types";
 
@@ -34,6 +39,7 @@ export default function SearchInput() {
   const [products, setProducts] = useState<ProductFiltered[]>([]);
   const [showList, setShowList] = useState(false);
   const [value, setValue] = useState<string>("");
+  const { scrollYProgress } = useScroll();
 
   async function handleSearch(term: string) {
     setValue(term);
@@ -60,17 +66,11 @@ export default function SearchInput() {
     if (pathname !== "/search") setValue("");
   }, [pathname]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (document.activeElement instanceof HTMLInputElement) {
-        document.activeElement.blur();
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    if (document.activeElement instanceof HTMLInputElement) {
+      document.activeElement.blur();
+    }
+  });
 
   return (
     <div className="relative flex items-center flex-1">
@@ -97,14 +97,14 @@ export default function SearchInput() {
         enterKeyHint="enter"
       />
       <Search className="h-4 w-4 absolute right-3" />
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {showList && pathname !== "/search" && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-background border shadow-2xl rounded-2xl absolute z-40 top-12 left w-full p-4"
+            className="bg-background border shadow-2xl rounded-sm absolute z-40 top-12 left w-full p-4"
           >
             {products?.length === 0 && (
               <div>
