@@ -139,6 +139,7 @@ export default function ProductIdDesc({
       <Button
         className="w-full h-14 mt-2 rounded-full text-lg md:text-base lg:text-lg relative"
         onClick={() => handleAddToCart()}
+        disabled={stock <= 0 || selectedSize === undefined || loading}
       >
         <Plus className="absolute max-sm:left-3 left-5 md:left-3 lg:left-5" />
         {loading ? "Adicionando..." : "Adicionar ao carrinho"}

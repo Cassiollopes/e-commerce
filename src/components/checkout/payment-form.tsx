@@ -187,6 +187,7 @@ export default function PaymentForm({
       <Button
         onClick={() => sellProducts()}
         className="sticky drop-shadow-2xl bottom-10 w-full mt-2 h-14 rounded-full text-lg md:text-base lg:text-lg"
+        disabled={loading}
       >
         <DollarSign className="absolute left-5 md:left-3 lg:left-5" />
         {loading ? "Realizando compra..." : "Realizar compra"}
