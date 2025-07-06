@@ -32,14 +32,14 @@ export default function NavBar() {
       transition ease-linear duration-150 md:sticky z-50 top-0 bg-background flex items-center justify-between py-4 px-6
       max-md:gap-2 gap-4 max-md:flex-wrap"
     >
-      <div className="flex items-center md:w-1/3 gap-4">
+      <div className="flex items-center xl:w-1/3 gap-4">
         <LogoRounded />
-        <Links className="max-md:hidden" />
+        <Links className="max-xl:hidden" />
       </div>
-      <div className="w-1/3 max-md:w-full max-md:order-3">
+      <div className="md:flex-1 max-md:w-full max-md:order-3">
         <SearchInput />
       </div>
-      <div className="flex items-center md:w-1/3 justify-between max-md:justify-end gap-2">
+      <div className="flex items-center xl:w-1/3 justify-between max-md:justify-end gap-2 md:gap-6">
         <div className="max-md:hidden flex items-center justify-center gap-4">
           <UserMenu />
           <Link

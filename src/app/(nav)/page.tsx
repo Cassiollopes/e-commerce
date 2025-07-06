@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="grid items-start justify-items-center min-h-screen px-4 gap-4">
+    <div className="grid items-start justify-items-center px-4 gap-4">
       <Suspense fallback={<ThreeProductsSkeleton />}>
         <ThreeProducts />
       </Suspense>
