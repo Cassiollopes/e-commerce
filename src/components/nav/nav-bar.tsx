@@ -7,7 +7,6 @@ import MenuMobile from "../menu/menu-mobile";
 import { useEffect, useState } from "react";
 import SearchInput from "./search-input";
 import { LogoRounded } from "../logo";
-import { Button, buttonVariants } from "../ui/button";
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
 
