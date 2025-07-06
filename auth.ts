@@ -10,9 +10,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [GitHub, Google],
   adapter: PrismaAdapter(prisma),
+  experimental: {
+    enableWebAuthn: false,
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
       return true;
     },
   },
+  trustHost: true,
 });
