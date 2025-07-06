@@ -73,7 +73,7 @@ export function LoginForm({
               <div>
                 <CircleAlert size={20} />
               </div>
-              <p className="text-sm">
+              <p className="text-sm text-white">
                 {error === "OAuthAccountNotLinked"
                   ? "Este e-mail já está vinculado a outro login. Use o provedor original."
                   : "Erro ao fazer login. Tente novamente."}
