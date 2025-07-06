@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Github } from "lucide-react";
+import { CircleAlert, Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { Logo } from "./logo";
 
@@ -20,18 +20,14 @@ export function LoginForm({
   ...props
 }: { next?: string; error?: string } & React.ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      {error && (
-        <h1 className="text-red-500 font-bold">
-          {error === "OAuthAccountNotLinked"
-            ? "Você já possui uma conta com este e-mail usando outro método de login. Faça login com o provedor original."
-            : "Erro ao fazer login. Tente novamente."}
-        </h1>
-      )}
+    <div
+      className={cn("flex flex-col gap-6 w-full max-w-[400px]", className)}
+      {...props}
+    >
       {next === "/checkout" && (
-        <h1 className="font-bold text-muted-foreground">
+        <span className="font-bold text-muted-foreground">
           Faca login para acessar {next}
-        </h1>
+        </span>
       )}
       <Card>
         <CardHeader>
@@ -72,6 +68,16 @@ export function LoginForm({
               </Button>
             </div>
           </div>
+          {error && (
+            <Card className="text-background flex items-center gap-4 border-red-400 bg-red-300 p-4 mt-4">
+              <CircleAlert />
+              <p>
+                {error === "OAuthAccountNotLinked"
+                  ? "Você já possui uma conta com este e-mail usando outro método de login. Faça login com o provedor original."
+                  : "Erro ao fazer login. Tente novamente."}
+              </p>
+            </Card>
+          )}
         </CardContent>
       </Card>
     </div>

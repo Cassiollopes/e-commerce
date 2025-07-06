@@ -21,7 +21,7 @@ export default async function Login(props: {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen p-4">
       <LoginForm next={searchParams?.next} error={searchParams?.error} />
     </div>
   );
