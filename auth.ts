@@ -10,4 +10,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [GitHub, Google],
   adapter: PrismaAdapter(prisma),
+  allowDangerousEmailAccountLinking: true
 });
