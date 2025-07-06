@@ -10,5 +10,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [GitHub, Google],
   adapter: PrismaAdapter(prisma),
-  allowDangerousEmailAccountLinking: true
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider && account.provider !== "credentials") {
+        return true;
+      }
+      return true;
+    },
+  },
 });
