@@ -4,6 +4,7 @@ export default function Footer() {
   return (
     <footer className="flex items-center justify-center w-full py-6 border-t">
       <Link
+        target="_blank"
         href={"https://github.com/cassiollopes"}
         className="font-bold group hover:text-muted-foreground ease-in duration-300"
       >
