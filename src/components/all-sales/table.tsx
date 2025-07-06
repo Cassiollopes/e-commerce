@@ -40,7 +40,7 @@ export default async function SalesTable({
                 <SalesAvatar sale={{ user: sale.user, userId: sale.user_id }} />
               </TableCell>
               <TableCell>{sale.payment_method}</TableCell>
-              <TableCell>{sale.createdAt.toLocaleDateString()}</TableCell>
+              <TableCell>{sale.createdAt.toLocaleDateString("pt-BR")}</TableCell>
               <TableCell>{sale.delivery_method}</TableCell>
               <TableCell className="text-right">
                 {PriceFormatter(sale.total)}
