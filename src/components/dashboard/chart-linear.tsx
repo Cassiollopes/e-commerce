@@ -32,7 +32,7 @@ export default function Linear() {
     });
   }, []);
 
-  const chartData = Array.from({ length: 6 }, (_, index) => ({
+  const chartData = Array.from({ length: 7 }, (_, index) => ({
     month: new Date(0, index).toLocaleString("pt-BR", { month: "long" }),
     total: 0,
     sales: 0,
