@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default async function Login(props: {
   searchParams?: Promise<{
     next?: string;
+    error?: string;
   }>;
 }) {
   const searchParams = await props.searchParams;
@@ -21,7 +22,7 @@ export default async function Login(props: {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <LoginForm next={searchParams?.next} />
+      <LoginForm next={searchParams?.next} error={searchParams?.error} />
     </div>
   );
 }

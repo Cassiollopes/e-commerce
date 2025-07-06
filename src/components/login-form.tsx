@@ -16,10 +16,18 @@ import { Logo } from "./logo";
 export function LoginForm({
   className,
   next,
+  error,
   ...props
-}: { next?: string } & React.ComponentPropsWithoutRef<"div">) {
+}: { next?: string; error?: string } & React.ComponentPropsWithoutRef<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      {error && (
+        <h1 className="text-red-500 font-bold">
+          {error === "OAuthAccountNotLinked"
+            ? "Você já possui uma conta com este e-mail usando outro método de login. Faça login com o provedor original."
+            : "Erro ao fazer login. Tente novamente."}
+        </h1>
+      )}
       {next === "/checkout" && (
         <h1 className="font-bold text-muted-foreground">
           Faca login para acessar {next}
