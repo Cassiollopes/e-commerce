@@ -69,11 +69,11 @@ export function LoginForm({
             </div>
           </div>
           {error && (
-            <Card className="flex items-center gap-2 border-red-600 bg-red-400 p-4 mt-4 justify-center">
+            <Card className="flex items-center gap-2 border-red-600 bg-red-400 p-4 mt-4 justify-center  text-white">
               <div>
                 <CircleAlert size={20} />
               </div>
-              <p className="text-sm text-white">
+              <p className="text-sm">
                 {error === "OAuthAccountNotLinked"
                   ? "Este e-mail já está vinculado a outro login. Use o provedor original."
                   : "Erro ao fazer login. Tente novamente."}

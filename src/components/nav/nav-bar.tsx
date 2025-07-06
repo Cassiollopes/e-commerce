@@ -40,7 +40,7 @@ export default function NavBar() {
         <SearchInput />
       </div>
       <div className="flex items-center md:w-1/3 justify-between max-md:justify-end gap-2">
-        <div className="max-md:hidden flex items-center gap-4">
+        <div className="max-md:hidden flex items-center justify-center gap-4">
           <UserMenu />
           <Link
             className={`rounded-full bg-blue-500 dark:bg-blue-700 dark:border-blue-400 text-white border-blue-700 p-6 py-2 border-[1.5px] flex gap-2 items-center justify-center text-sm transition-all hover:bg-blue-600 dark:hover:bg-blue-600`}
