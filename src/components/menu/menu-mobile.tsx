@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 import {
   Sheet,
@@ -11,12 +11,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, UserRound } from "lucide-react";
+import { Menu, PanelsTopLeft, UserRound } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Links from "../nav/links";
 import ModeToggle from "../mode-toggle";
 import LogButton from "../log-button";
+import Link from "next/link";
 
 export default function MenuMobile() {
   const { data: session } = useSession();
@@ -62,6 +63,13 @@ export default function MenuMobile() {
           <ModeToggle />
           <LogButton />
         </div>
+        <Link
+          className={`rounded-full ${buttonVariants({ variant: "outline" })} !w-full`}
+          href="/dashboard"
+        >
+          <PanelsTopLeft size={16} />
+          Dashboard
+        </Link>
         <SheetFooter>
           <SheetClose asChild></SheetClose>
         </SheetFooter>

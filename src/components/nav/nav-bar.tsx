@@ -7,6 +7,9 @@ import MenuMobile from "../menu/menu-mobile";
 import { useEffect, useState } from "react";
 import SearchInput from "./search-input";
 import { LogoRounded } from "../logo";
+import { Button, buttonVariants } from "../ui/button";
+import { PanelsTopLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function NavBar() {
   const [scroll, setScroll] = useState(false);
@@ -38,8 +41,15 @@ export default function NavBar() {
         <SearchInput />
       </div>
       <div className="flex items-center md:w-1/3 justify-between max-md:justify-end gap-2">
-        <div className="max-md:hidden">
+        <div className="max-md:hidden flex items-center gap-4">
           <UserMenu />
+          <Link
+            className={`rounded-full bg-blue-500 dark:bg-blue-700 dark:border-blue-400 text-white border-blue-700 p-6 py-2 border-[1.5px] flex gap-2 items-center justify-center text-sm transition-all hover:bg-blue-600 dark:hover:bg-blue-600`}
+            href="/dashboard"
+          >
+            <PanelsTopLeft size={16} />
+            Dashboard
+          </Link>
         </div>
         <div className="md:hidden">
           <MenuMobile />
