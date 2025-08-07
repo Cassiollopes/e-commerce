@@ -87,7 +87,7 @@ export default function Linear() {
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
               defaultIndex={chartData.findIndex(
-                (item) => item.month === bestMonth.month
+                (item) => item.month === bestMonth.month,
               )}
             />
           </BarChart>
