@@ -33,7 +33,7 @@ export default function Linear() {
   }, []);
 
   const chartData = Array.from({ length: 7 }, (_, index) => ({
-    month: new Date(0, (index + 1)).toLocaleString("pt-BR", { month: "long" }),
+    month: new Date(0, index + 1).toLocaleString("pt-BR", { month: "long" }),
     total: 0,
     sales: 0,
   }));
@@ -86,7 +86,9 @@ export default function Linear() {
             <ChartTooltip
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
-              defaultIndex={chartData.findIndex((item) => item.month === bestMonth.month)}
+              defaultIndex={chartData.findIndex(
+                (item) => item.month === bestMonth.month
+              )}
             />
           </BarChart>
         </ChartContainer>
