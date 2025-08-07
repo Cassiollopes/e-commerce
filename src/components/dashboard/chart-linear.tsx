@@ -33,15 +33,19 @@ export default function Linear() {
   }, []);
 
   const chartData = Array.from({ length: 7 }, (_, index) => ({
-    month: new Date(0, index).toLocaleString("pt-BR", { month: "long" }),
+    month: new Date(0, (index + 1)).toLocaleString("pt-BR", { month: "long" }),
     total: 0,
     sales: 0,
   }));
 
   sales.forEach((sale) => {
-    const month = sale.createdAt.getMonth();
+    const month = sale.createdAt.getMonth() - 1;
     chartData[month].total += sale.total;
     chartData[month].sales += 1;
+  });
+
+  const bestMonth = chartData.reduce((prev, current) => {
+    return prev.total > current.total ? prev : current;
   });
 
   return (
@@ -82,7 +86,7 @@ export default function Linear() {
             <ChartTooltip
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
-              defaultIndex={new Date().getMonth()}
+              defaultIndex={chartData.findIndex((item) => item.month === bestMonth.month)}
             />
           </BarChart>
         </ChartContainer>
