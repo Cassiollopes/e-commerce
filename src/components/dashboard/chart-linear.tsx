@@ -46,9 +46,9 @@ export default function Linear() {
     const month = sale.createdAt.toLocaleString("pt-BR", { month: "long" });
     const item = chartData.find((data) => data.month === month);
     if (item) {
-      item.total += sale.total
-      item.sales += 1
-    };
+      item.total += sale.total;
+      item.sales += 1;
+    }
   });
 
   const bestMonth = chartData.reduce((prev, current) => {
@@ -94,7 +94,7 @@ export default function Linear() {
               content={<ChartTooltipContent indicator="line" />}
               cursor={false}
               defaultIndex={chartData.findIndex(
-                (item) => item.month === bestMonth.month
+                (item) => item.month === bestMonth.month,
               )}
             />
           </BarChart>
